@@ -13,10 +13,10 @@
         <!-- Light Logo-->
         <a href="index.html" class="logo logo-light">
             <span class="logo-sm">
-                <img src="/velzon/assets/images/logo-sm.png" alt="" height="22">
+                <img src="/images/star-one-logo.png" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="/velzon/assets/images/logo-light.png" alt="" height="17">
+                <img src="/images/star-one-logo.png" alt="" style="height: 60px" height="17">
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -27,13 +27,17 @@
 
     <div id="scrollbar">
         <div class="container-fluid">
-
             <div id="two-column-menu">
             </div>
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="widgets.html">
-                        <i class="ri-honour-line"></i> <span data-key="t-widgets">Widgets</span>
+                    <a class="nav-link menu-link" href="{{ route('customers.index') }}">
+                        <i class="ri-honour-line"></i> <span data-key="t-widgets">Cutomers</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('delivery-partners.index') }}">
+                        <i class="ri-honour-line"></i> <span data-key="t-widgets">Delivery partners</span>
                     </a>
                 </li>
             </ul>

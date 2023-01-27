@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('phone')->unique();
+            $table->string('email')->nullable();
+            $table->string('role')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->timestamp('email_verified_at')->nullable();
@@ -25,7 +27,9 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->foreignId('country_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->foreignId('state_id')->nullable();
+            $table->foreignId('city_id')->nullable();
+            $table->string('profile_picture', 2048)->nullable();
             $table->timestamps();
         });
     }

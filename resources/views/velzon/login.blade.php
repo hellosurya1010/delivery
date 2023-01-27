@@ -10,18 +10,18 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="/velzon/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
 
     <!-- Layout config Js -->
-    <script src="/velzon/assets/js/layout.js"></script>
+    <script src="/assets/js/layout.js"></script>
     <!-- Bootstrap Css -->
-    <link href="/velzon/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="/velzon/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="/velzon/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
-    <link href="/velzon/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -48,7 +48,7 @@
                         <div class="text-center mt-sm-5 mb-4 text-white-50">
                             <div>
                                 <a href="index.html" class="d-inline-block auth-logo">
-                                    <img src="/velzon/assets/images/logo-light.png" alt="" height="20">
+                                    <img src="/assets/images/logo-light.png" alt="" height="20">
                                 </a>
                             </div>
                             <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
@@ -173,19 +173,19 @@
     <!-- end auth-page-wrapper -->
 
     <!-- JAVASCRIPT -->
-    <script src="/velzon/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/velzon/assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="/velzon/assets/libs/node-waves/waves.min.js"></script>
-    <script src="/velzon/assets/libs/feather-icons/feather.min.js"></script>
-    <script src="/velzon/assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
-    <script src="/velzon/assets/js/plugins.js"></script>
+    <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="/assets/libs/node-waves/waves.min.js"></script>
+    <script src="/assets/libs/feather-icons/feather.min.js"></script>
+    <script src="/assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+    <script src="/assets/js/plugins.js"></script>
 
     <!-- particles js -->
-    <script src="/velzon/assets/libs/particles.js/particles.js"></script>
+    <script src="/assets/libs/particles.js/particles.js"></script>
     <!-- particles app js -->
-    <script src="/velzon/assets/js/pages/particles.app.js"></script>
+    <script src="/assets/js/pages/particles.app.js"></script>
     <!-- password-addon init -->
-    <script src="/velzon/assets/js/pages/password-addon.init.js"></script>
+    <script src="/assets/js/pages/password-addon.init.js"></script>
 </body>
 
 </html>

@@ -16,8 +16,13 @@
 <!-- gridjs js -->
 <script src="/velzon/assets/libs/gridjs/gridjs.umd.js"></script>
 
-<!-- Dashboard init -->
-<script src="/velzon/assets/js/pages/dashboard-job.init.js"></script>
+<!--select2 cdn-->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <!-- App js -->
-<script src="/velzon/assets/js/app.js"></script>
+{{-- <script src="/velzon/assets/js/app.js"></script> --}}
+<script src="/js/ui.init.js"></script>
+<script src="/js/star-one.js"></script>
+
+  <!-- Sweet Alerts js -->
+  <script src="/velzon/assets/libs/sweetalert2/sweetalert2.min.js"></script>

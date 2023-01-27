@@ -3,7 +3,7 @@
     data-sidebar-image="none" data-preloader="disable">
 
 <head>
-    <title>Job Dashboard | Velzon - Admin & Dashboard Template</title>
+    <title>Star One</title>
     @include('layouts.partials._headerLinks')
     @yield('style')
 </head>

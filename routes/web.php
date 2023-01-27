@@ -1,6 +1,13 @@
 <?php
 
+use App\Http\Controllers\Web\AjaxController;
+use App\Http\Controllers\Web\AjaxInputController;
+use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\CustomerController;
 use App\Http\Controllers\Web\DashboardController;
+use App\Http\Controllers\Web\DataTableController;
+use App\Http\Controllers\Web\DeliveryPartnerController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +25,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::resource("customers", CustomerController::class)->name('admin', 'customers');
+Route::resource("delivery-partners", DeliveryPartnerController::class)->name('admin', 'delivery-partner');
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
 });
 
-Route::view('admin', "layouts.admin");
+Route::group(['prefix'=>'ajax','as'=>'ajax.'], function(){
+    Route::get('states/{countryId?}', [AjaxInputController::class, "getStates"])->name('states');
+    Route::get('cities/{stateId?}', [AjaxInputController::class, "getCities"])->name('cities');
+    Route::get('check/{slug}/exists', [AuthController::class, 'checkExists']);
+});
+
+Route::group(['prefix'=>'datatable','as'=>'datatable.'], function(){
+    Route::get('delivery-partners', [DataTableController::class, "deliveryPartners"])->name('delivery-partners');
+});
+

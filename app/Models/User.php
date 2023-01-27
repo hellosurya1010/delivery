@@ -18,6 +18,9 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    public static $customer = "Customer";
+    public static $deliveryPartner = "DeliveryPartner";
+
     /**
      * The attributes that are mass assignable.
      *
@@ -58,4 +61,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function deliveryPartner()
+    {
+        return $this->hasOne(DeliveryPartner::class);
+    }
+
 }
