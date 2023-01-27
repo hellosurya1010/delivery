@@ -4,3 +4,4 @@
         placeholder="{{ $placeholder }}" value="{{ $value }}">
     <p class="input-error" data-error="{{ $name }}"></p>
 </div>
+

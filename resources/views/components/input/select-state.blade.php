@@ -19,6 +19,7 @@
             });
 
             stateSelect.on('change', function() {
+                let {ajaxError} = formHelper();
                 $.ajax({
                     type: "GET",
                     url: `{{ url('') }}/ajax/cities/${this.value}`,
@@ -35,7 +36,8 @@
                             newOption = new Option(state.name, state.id, false, false);
                             citySelect.append(newOption);
                         });
-                    }
+                    }, 
+                    error: ajaxError(),
                 });
             });
 

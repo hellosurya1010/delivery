@@ -78,19 +78,16 @@
                                 <p class="input-error" data-error="city_id"></p>
                             </div>
                             <div class="col-md-6  mt-1 form-group">
-                                <label for="firstName" class="form-label">First name</label>
-                                <input type="text" name="first_name" class="form-control" id="firstName" value="">
-                                <p class="input-error" data-error="first_name"></p>
+                                <x-input.input-field label="First name" name="first_name" id="first_name">
+                                </x-input.input-field>
                             </div>
                             <div class="col-md-6  mt-1 form-group">
-                                <label for="lastName" class="form-label">Last name</label>
-                                <input type="text" name="last_name" class="form-control" id="lastName" value="">
-                                <p class="input-error" data-error="last_name"></p>
+                                <x-input.input-field label="Last name" name="last_name" id="last_name">
+                                </x-input.input-field>
                             </div>
                             <div class="col-md-6  mt-1 form-group">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="text" name="email" class="form-control" id="email" value="">
-                                <p class="input-error" data-error="email"></p>
+                                <x-input.input-field label="Email" name="email" id="email">
+                                </x-input.input-field>
                             </div>
                             <div class="col-md-6  mt-1 form-group">
                                 <label for="phone" class="form-label">Phone</label>
@@ -105,23 +102,22 @@
                                 <p class="input-error" data-error="phone"></p>
                             </div>
                             <div class="col-md-6  mt-1 form-group">
-                                <label for="drivingLicense" class="form-label">Driving license</label>
-                                <input type="text" name="driving_license_number" class="form-control"
-                                    id="drivingLicense" value="">
-                                <p class="input-error" data-error="driving_license_number"></p>
+                                <x-input.input-field label="Driving license" name="driving_license_number"
+                                    id="driving_license_number">
+                                </x-input.input-field>
                             </div>
                             <div class="col-md-6  mt-1 form-group">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="text" name="password" class="form-control" id="password"
-                                    value="">
-                                <p class="input-error" data-error="password"></p>
+                                <x-input.input-field label="Password" name="password" id="password">
+                                </x-input.input-field>
                             </div>
                             <div class="col-md-6  mt-1 form-group">
-                                <x-input.image-upload name="profile_picture" label="Profile picture" id='profile_picture'>
+                                <x-input.image-upload name="profile_picture" label="Profile picture"
+                                    id='profile_picture'>
                                 </x-input.image-upload>
                             </div>
                             <div class="col-md-6  mt-1 form-group">
-                                <x-input.image-upload name="driving_license_image" label="Driving license image" id='driving_license_image'>
+                                <x-input.image-upload name="driving_license_image" label="Driving license image"
+                                    id='driving_license_image'>
                                 </x-input.image-upload>
                             </div>
                         </div>
@@ -147,6 +143,7 @@
     <script>
         let showDeliveryPartnerDetials;
         $(document).ready(function() {
+            alert('Hello');
             var e = $("#deliver-partners-table").DataTable({
                 processing: true,
                 serverSide: true,
@@ -196,30 +193,37 @@
                 getFormData,
                 ajaxError,
                 formRest,
-                formEditState
+                formState
             } = formHelper(DeliveryPartnerForm.id);
 
             let {
                 creaetState,
-                updateState
-            } = formEditState(`delivery-partner-from-toggler`);
+                updateState, 
+                stateToggler, 
+            } = formState();
+
+            stateToggler(`delivery-partner-from-toggler`);
 
             document.getElementById('create-model-button').addEventListener('click', () => {
-                creaetState(() => {
-                    myLargeModalLabel.innerText = 'Add delivery partner';
+                creaetState({
+                    before() {
+                        myLargeModalLabel.innerText = 'Add delivery partner';
+                    }
                 });
             });
 
             showDeliveryPartnerDetials = (buttonEl) => {
-                updateState(() => {
+                updateState({before(){
                     myLargeModalLabel.innerText = 'Update delivery partner';
-                });
+                }});
                 let user = JSON.parse(buttonEl.dataset.user);
                 let form = DeliveryPartnerForm;
                 form.email.value = user.email;
                 form.first_name.value = user.first_name;
                 form.last_name.value = user.last_name;
-                let {delivery_partner: dv} = user;
+                let {
+                    delivery_partner: dv
+                } = user;
                 form.driving_license_number.value = dv.driving_license_number;
                 form.phone.value = user.phone;
                 // form.driving_license.value = user.driving_license;
@@ -254,7 +258,7 @@
                         },
                         error: ajaxError()
                     });
-                }, 
+                },
                 update() {
 
                 }
@@ -267,7 +271,7 @@
                 } = DeliveryPartnerForm.dataset;
                 if (formType == "create") {
                     deliveryPartner.create();
-                }else if(formType == "update"){
+                } else if (formType == "update") {
                     deliveryPartner.update();
                 }
             });

@@ -19,6 +19,7 @@
             });
 
             countrySelect.on('change', function() {
+                let {ajaxError} = formHelper();
                 $.ajax({
                     type: "GET",
                     url: `{{ url('') }}/ajax/states/${this.value}`,
@@ -35,7 +36,8 @@
                             newOption = new Option(state.name, state.id, false, false);
                             stateSelect.append(newOption);
                         });
-                    }
+                    },
+                    error: ajaxError(),
                 });
             });
 
