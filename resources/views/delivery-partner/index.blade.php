@@ -120,6 +120,11 @@
                                     id='driving_license_image'>
                                 </x-input.image-upload>
                             </div>
+                            <div class="col-md-6  mt-1 form-group">
+                                <x-input.select name="driving_license_image" label="Driving license image"
+                                    id='driving_license_image'>
+                                </x-input.select>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -143,7 +148,6 @@
     <script>
         let showDeliveryPartnerDetials;
         $(document).ready(function() {
-            alert('Hello');
             var e = $("#deliver-partners-table").DataTable({
                 processing: true,
                 serverSide: true,
@@ -255,6 +259,9 @@
                         success(res) {
                             formRest();
                             $('.bs-example-modal-lg').modal('hide');
+                            SwalModal({
+                                title: "New delivery partner added."
+                            });
                         },
                         error: ajaxError()
                     });

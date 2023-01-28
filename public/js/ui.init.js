@@ -93,6 +93,14 @@ const formHelper = (formId = 'No-form') => {
     };
 };
 
+
+$(document).ready(function(){
+    $('.single-select2').each(function() {
+        console.log($(this));
+    });
+})
+
+
 const SwalModal = ({
     timer = 2500,
     type = "success",
