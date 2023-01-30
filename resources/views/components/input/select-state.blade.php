@@ -9,7 +9,6 @@
         </select>
     </div>
 
-
     <script>
         $(document).ready(function() {
             let stateSelect = $("#{{ $id }}");

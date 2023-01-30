@@ -1,4 +1,4 @@
-const formHelper = (formId = 'No-form') => {
+const formHelper = (formId = "No-form") => {
     const inputFieldClassName = ".form-control";
     let toggleBtn, formRest;
     let formEl = document.querySelector(`#${formId}`);
@@ -16,10 +16,24 @@ const formHelper = (formId = 'No-form') => {
         return data;
     };
 
+    const imgPreview = ({inputFileId, imageElId}) => {
+        let fileEl = document.querySelector(`#${inputFileId}`);
+        let imgEl = document.querySelector(`#${imageElId}`);
+        fileEl.addEventListener("change", function () {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.addEventListener("load", function () {
+                imgEl.src = reader.result;
+            });
+            reader.readAsDataURL(file);
+        });
+    };
+
     let formState = () => {
         const fields = formEl.querySelectorAll(
-            `input,select,${inputFieldClassName}`);
-        let creaetState = ({before = () => {}, after = () => {}}) => {
+            `input,select,${inputFieldClassName}`
+        );
+        let creaetState = ({ before = () => {}, after = () => {} }) => {
             before();
             clearErrorMessages();
             formRest();
@@ -31,7 +45,7 @@ const formHelper = (formId = 'No-form') => {
             changeInputAccess(false);
             after();
         };
-        let updateState = ({before = () => {}, after = () => {}}) => {
+        let updateState = ({ before = () => {}, after = () => {} }) => {
             before();
             clearErrorMessages();
             formEl.dataset.formType = "update";
@@ -50,11 +64,11 @@ const formHelper = (formId = 'No-form') => {
         };
 
         let stateToggler = (toggleBtnId) => {
-                toggleBtn = document.getElementById(toggleBtnId);
-                toggleBtn.addEventListener("click", (e) => {
-                    changeInputAccess(!e.target.checked);
-                });
-        }
+            toggleBtn = document.getElementById(toggleBtnId);
+            toggleBtn.addEventListener("click", (e) => {
+                changeInputAccess(!e.target.checked);
+            });
+        };
 
         return { creaetState, updateState, toggleBtn, stateToggler };
     };
@@ -75,8 +89,12 @@ const formHelper = (formId = 'No-form') => {
                 }
             } else if (status == 500) {
                 SwalModal({ type: "error", title: "Sever error!" });
-            }else{
-                SwalModal({ type: "error", title: `Sever error!`, message: `status code: ${status}` });
+            } else {
+                SwalModal({
+                    type: "error",
+                    title: `Sever error!`,
+                    message: `status code: ${status}`,
+                });
             }
         };
     };
@@ -93,13 +111,12 @@ const formHelper = (formId = 'No-form') => {
     };
 };
 
-
-$(document).ready(function(){
-    $('.single-select2').each(function() {
+php;
+$(document).ready(function () {
+    $(".single-select2").each(function () {
         console.log($(this));
     });
-})
-
+});
 
 const SwalModal = ({
     timer = 2500,
@@ -142,4 +159,3 @@ const SwalModal = ({
         showCloseButton: !0,
     });
 };
-
