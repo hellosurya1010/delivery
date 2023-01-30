@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddDeleverPartnerRequest;
 use App\Http\Requests\CreateCustomerRequest;
 use App\Models\User;
+use App\Services\AuthService;
 use App\Services\CustomerService;
 use App\Services\DPService;
 use App\Services\ResponseService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -49,7 +52,7 @@ class AuthController extends Controller
                 'name' => 'required',
                 'role' => 'required|in:Doctor,Patient',
                 'email' => 'required|email|unique:users,email',
-                'mobile_number' => 'required|unique:users,phone',
+                'phone' => 'required|unique:users,phone',
                 'password' => 'required',
                 'consultation_fees' => 'nullable',
                 'medicine_type_id' => 'nullable',
@@ -57,7 +60,7 @@ class AuthController extends Controller
             $user->role = $request->role;
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->phone = $request->mobile_number;
+            $user->phone = $request->phone;
             $user->password = Hash::make($request->password);
             $user->role = $request->role;
             if ($request->hasFile('profile_picture')) {
@@ -76,39 +79,19 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate(['mobile_number' => 'required|min:10']);
-
-        $user = User::where('phone', $request->mobile_number)->first();
-        if (!isset($request->password)) {
-            return response()->json(['messsage' =>  "Mobile number dosen't exists!", 'errors' => true]);
-        }
-
-        $request->validate(['mobile_number' => 'required', 'password' => 'required']);
-
+        $request->validate(['phone' => 'required', 'password' => 'required']);
+        $user = User::where('phone', $request->phone)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['messsage' =>  "Wrong password", 'errors' => true]);
-        }
-
-        $user_details = $user->toArray();
-        $user_details['profile_picture']  = $user_details['profile_pic'];
-        $user_details['mobile_number']  = $user_details['phone'];
-        unset($user_details['profile_pic']);
-        unset($user_details['phone']);
-
-        if ($user->role == 'Patient' && $user->patient != null) {
-            $user_details += $user->patient->toArray();
-        }
-
-        if ($user->role == 'Doctor' && $user->doctor_details != null) {
-            $user_details += $user->doctor_details->toArray();
-        }
-        if ($user->role == 'HA' && $user->doctor_details != null) {
-            $user_details += $user->doctor_details->toArray();
+            return (new ResponseService)->message('Wrong password')->code(500)->errors(true)->getResponse();
         }
         $token = $user->createToken('tokens')->plainTextToken;
-
         Auth::login($user);
-        return response()->json(['message' => 'Logined Successfully', 'user_details' => $user_details, 'errors' => false, 'token' => $token], 200);
+        return (new ResponseService)
+            ->message('Logined Successfully')
+            ->data([
+                'token' => $token,
+                'user_details' => $user
+            ])->getResponse();
     }
 
 
@@ -120,9 +103,9 @@ class AuthController extends Controller
 
     public function forgotPassword(Request $request)
     {
-        $request->validate(['mobile_number' => 'required|min:10', 'password' => 'required|min:8']);
+        $request->validate(['phone' => 'required', 'password' => 'required|min:8']);
         try {
-            $user = User::where('phone', $request->mobile_number)->first();
+            $user = User::where('phone', $request->phone)->first();
             $user->update(['password' => Hash::make($request->password)]);
             $this->message = "Password changed successfully";
         } catch (\Throwable $th) {
@@ -135,9 +118,9 @@ class AuthController extends Controller
     {
 
         if ($requestFor == "mobile-number") {
-            $request->validate(["mobile_number" => "required|min:10|unique:users,phone," . auth()->id() . ",id"]);
+            $request->validate(["phone" => "required|unique:users,phone," . auth()->id() . ",id"]);
             try {
-                User::where('id', auth()->id())->update(['phone' => $request->mobile_number]);
+                User::where('id', auth()->id())->update(['phone' => $request->phone]);
                 $this->message = "Mobile number changed successfully";
             } catch (\Throwable $th) {
                 return response()->json(['message' => 'Server error', 'error' => true], 200);
@@ -163,8 +146,8 @@ class AuthController extends Controller
     {
 
         if ($requestFor == 'mobile-number') {
-            $request->validate(['mobile_number' => 'required|min:10']);
-            $user = User::where('phone', $request->mobile_number)->first();
+            $request->validate(['phone' => 'required']);
+            $user = User::where('phone', $request->phone)->first();
             if ($user) {
                 $this->message = 'Mobile number already exists';
             } else {
@@ -201,12 +184,17 @@ class AuthController extends Controller
         return response()->json(['message' => $this->message, 'exists' => $this->exists, 'error' => $this->errors], $this->code);
     }
 
-    public function updateDeviceToken(Request $request, $slug)
+    public function updateDeviceToken(Request $request)
     {
-        $request->validate(['device_token' => 'required']);
-        if ($slug == 'android') {
-            auth()->user()->update(['android_key' => $request->device_token]);
-        }
-        return response()->json(['message' => $this->message, 'error' => $this->errors], $this->code);
+        $validated = $request->validate(['device_token' => 'required']);
+        AuthService::updateDeviceToken(auth()->user(), $validated);
+        return (new ResponseService)->message('Co-ordinates updated successfully.')->getResponse();
+    }
+
+    public function updateCoOrdinates(Request $request)
+    {
+        $validated = $request->validate(['latitude' => "required", "longitude" => 'required']);
+        AuthService::updateCoOridinates(auth()->user(), $validated);
+        return (new ResponseService)->message('Co-ordinates updated successfully.')->getResponse();
     }
 }

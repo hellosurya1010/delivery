@@ -14,11 +14,13 @@ class CreateShipmentsTable extends Migration
     public function up()
     {
         Schema::create('shipments', function (Blueprint $table) {
-           $table->increments('id');
-            $table->unsignedBigInteger('customer_id');
-            $table->foreign('customer_id')->references('id')->on('users')->onDelete('set null');
-            $table->unsignedBigInteger('delivery_partner_id');
-            $table->foreign('delivery_partner_id')->references('id')->on('users')->onDelete('set null');
+           $table->increments('id')->index();
+            // $table->unsignedInteger('customer_id');
+            // $table->foreign('customer_id')->references('id')->on('users')->onDelete('set null');
+            // $table->unsignedInteger('delivery_partner_id');
+            // $table->foreign('delivery_partner_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreignId('customer_id')->nullable();
+            $table->foreignId('delivery_partner_id')->nullable();
             $table->timestamp('to_delivery_at')->nullable();
             $table->float('price')->nullable();
             $table->float('distance')->nullable();

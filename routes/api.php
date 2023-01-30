@@ -21,6 +21,7 @@ Route::post('customer-regiseter', [AuthController::class, "addCustomerPartner"])
 Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('update-device-token', [AuthController::class, 'updateDeviceToken'])->middleware('auth:sanctum');
+    Route::post('update-co-ordinates', [AuthController::class, 'updateCoOrdinates'])->middleware('auth:sanctum');
     Route::post('forgot/password', [AuthController::class, 'forgotPassword']);
     Route::post('change/{requestFor}', [AuthController::class, 'changeChredentials'])->middleware('auth:sanctum');
     Route::post('check/password', [AuthController::class, 'checkPassword'])->middleware('auth:sanctum');
