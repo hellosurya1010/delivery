@@ -24,17 +24,17 @@ class AddDeleverPartnerRequest extends FormRequest
     public function rules()
     {
         return [
-            "country_id" => 'required',
-            "state_id" => 'required',
-            "city_id" => 'required',
+            "country_id" => 'required|numeric',
+            "state_id" => 'required|numeric',
+            "city_id" => 'required|numeric',
             "first_name" => 'required',
             "last_name" => 'required',
             "email" => 'required|email|unique:users,email',
             "phone" => 'required|numeric|unique:users,phone',
             "password" => 'required',
             "profile_picture" => 'required|image',
-            "driving_license_image" => 'required|image',
-            "driving_license_number" => 'required',
+            "driving_license_image" => 'nullable|image',
+            "driving_license_number" => 'nullable',
         ];
     }
 

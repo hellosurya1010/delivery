@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddDeleverPartnerRequest;
 use App\Http\Requests\CreateCustomerRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\AuthService;
 use App\Services\CustomerService;
@@ -90,15 +91,16 @@ class AuthController extends Controller
             ->message('Logined Successfully')
             ->data([
                 'token' => $token,
-                'user_details' => $user
+                'user_details' => new UserResource($user)
             ])->getResponse();
     }
+
 
 
     public function logout(Request $request)
     {
         auth()->user()->currentAccessToken()->delete();
-        return response()->json(['message' => 'Logout Successfully'], 200);
+        return (new ResponseService)->message('Logout Successfully')->getResponse();
     }
 
     public function forgotPassword(Request $request)
@@ -188,7 +190,7 @@ class AuthController extends Controller
     {
         $validated = $request->validate(['device_token' => 'required']);
         AuthService::updateDeviceToken(auth()->user(), $validated);
-        return (new ResponseService)->message('Co-ordinates updated successfully.')->getResponse();
+        return (new ResponseService)->message('Device token updated successfully.')->getResponse();
     }
 
     public function updateCoOrdinates(Request $request)
