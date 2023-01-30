@@ -39,6 +39,7 @@ return array(
     'App\\Models\\CountryCode' => $baseDir . '/app/Models/CountryCode.php',
     'App\\Models\\Customer' => $baseDir . '/app/Models/Customer.php',
     'App\\Models\\DeliveryPartner' => $baseDir . '/app/Models/DeliveryPartner.php',
+    'App\\Models\\Shipment' => $baseDir . '/app/Models/Shipment.php',
     'App\\Models\\State' => $baseDir . '/app/Models/State.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Observers\\UserObserver' => $baseDir . '/app/Observers/UserObserver.php',

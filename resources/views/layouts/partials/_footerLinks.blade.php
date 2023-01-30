@@ -24,5 +24,7 @@
 <script src="/js/ui.init.js"></script>
 <script src="/js/star-one.js"></script>
 
-  <!-- Sweet Alerts js -->
-  <script src="/velzon/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+<!-- Sweet Alerts js -->
+<script src="/velzon/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+<!-- Tostify Css-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

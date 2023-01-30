@@ -16,11 +16,11 @@ const formHelper = (formId = "No-form") => {
         return data;
     };
 
-    const imgPreview = ({inputFileId, imageElId}) => {
+    const imgPreview = ({ inputFileId, imageElId }) => {
         let fileEl = document.querySelector(`#${inputFileId}`);
         let imgEl = document.querySelector(`#${imageElId}`);
         fileEl.addEventListener("change", function () {
-            const file = fileInput.files[0];
+            const file = fileEl.files[0];
             const reader = new FileReader();
             reader.addEventListener("load", function () {
                 imgEl.src = reader.result;
@@ -88,13 +88,10 @@ const formHelper = (formId = "No-form") => {
                     errorEl.innerText = errors[field][0];
                 }
             } else if (status == 500) {
-                SwalModal({ type: "error", title: "Sever error!" });
+                toastr({ bgColor: "danger", text: "Sever error!" });
             } else {
-                SwalModal({
-                    type: "error",
-                    title: `Sever error!`,
-                    message: `status code: ${status}`,
-                });
+                toastr({ bgColor: "danger", text: "Sever error!" });
+                toastr({ bgColor: "danger", text: `status code: ${status}` });
             }
         };
     };
@@ -108,10 +105,10 @@ const formHelper = (formId = "No-form") => {
         formEl,
         formRest,
         formState,
+        imgPreview,
     };
 };
 
-php;
 $(document).ready(function () {
     $(".single-select2").each(function () {
         console.log($(this));
@@ -158,4 +155,21 @@ const SwalModal = ({
         buttonsStyling: !1,
         showCloseButton: !0,
     });
+};
+
+const toastr = ({ bgColor = "secondary", text }) => {
+    Toastify({
+        text,
+        duration: 3000,
+        style: {
+            background: `var(--vz-${bgColor})`,
+        },
+        close: true,
+        gravity: "top",
+        position: "right",
+        offset: {
+            x: 20, 
+            y: 20 
+          },
+    }).showToast();
 };

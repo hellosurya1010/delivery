@@ -18,8 +18,20 @@ use Illuminate\Support\Facades\Route;
 Route::post('delivery-partner-regiseter', [AuthController::class, "addDeleverPartner"]);
 Route::post('customer-regiseter', [AuthController::class, "addCustomerPartner"]);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('auth')->group(function () {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('update-device-token', [AuthController::class, 'updateDeviceToken'])->middleware('auth:sanctum');
+    Route::post('forgot/password', [AuthController::class, 'forgotPassword']);
+    Route::post('change/{requestFor}', [AuthController::class, 'changeChredentials'])->middleware('auth:sanctum');
+    Route::post('check/password', [AuthController::class, 'checkPassword'])->middleware('auth:sanctum');
+    Route::post('check/{reqeustFor}', [AuthController::class, 'checkChredentials']);
+    Route::get('search/{reqeustFor}/{id?}', [HomePageController::class, 'search']);
+    Route::post('status', [AuthController::class, 'status'])->middleware('auth:sanctum');
+    Route::post('approved', [AuthController::class, 'approved'])->middleware('auth:sanctum');
+    Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+    Route::get('family-tokens', [AuthController::class, 'familyTokens'])->middleware('auth:sanctum');
+    Route::post('social/login', [AuthController::class, 'socialLogin']);
+    Route::post('register', [AuthController::class, 'register']);
 });
 
 Route::get('check/{slug}/exists', [AuthController::class, 'checkExists']);

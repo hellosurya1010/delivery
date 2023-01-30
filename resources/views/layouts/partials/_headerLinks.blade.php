@@ -24,6 +24,8 @@
 <link href="/velzon/assets/css/app.min.css" rel="stylesheet" type="text/css" />
 <link href="/css/ui.init.css" rel="stylesheet" type="text/css" />
 <link href="/css/star-one.css" rel="stylesheet" type="text/css" />
+<!-- Tostify Css-->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <!-- custom Css-->
 <link href="/velzon/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
  <!--select2 cdn-->

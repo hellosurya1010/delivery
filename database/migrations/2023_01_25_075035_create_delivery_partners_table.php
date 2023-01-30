@@ -14,7 +14,7 @@ class CreateDeliveryPartnersTable extends Migration
     public function up()
     {
         Schema::create('delivery_partners', function (Blueprint $table) {
-            $table->id();
+           $table->increments('id');
             $table->foreignId('user_id');
             $table->string('driving_license_number')->nullable();
             $table->string('driving_license_image')->nullable();

@@ -604,6 +604,7 @@ class ComposerStaticInitba62615a066125bfd045d9941aa92c45
         'App\\Models\\CountryCode' => __DIR__ . '/../..' . '/app/Models/CountryCode.php',
         'App\\Models\\Customer' => __DIR__ . '/../..' . '/app/Models/Customer.php',
         'App\\Models\\DeliveryPartner' => __DIR__ . '/../..' . '/app/Models/DeliveryPartner.php',
+        'App\\Models\\Shipment' => __DIR__ . '/../..' . '/app/Models/Shipment.php',
         'App\\Models\\State' => __DIR__ . '/../..' . '/app/Models/State.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Observers\\UserObserver' => __DIR__ . '/../..' . '/app/Observers/UserObserver.php',

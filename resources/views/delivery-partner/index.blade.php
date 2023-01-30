@@ -114,20 +114,18 @@
                                 <x-input.image-upload name="profile_picture" label="Profile picture"
                                     id='profile_picture'>
                                 </x-input.image-upload>
+                                
                             </div>
                             <div class="col-md-6  mt-1 form-group">
                                 <x-input.image-upload name="driving_license_image" label="Driving license image"
                                     id='driving_license_image'>
                                 </x-input.image-upload>
-                            </div>
-                            <div class="col-md-6  mt-1 form-group">
-                                <x-input.select name="driving_license_image" label="Driving license image"
-                                    id='driving_license_image'>
-                                </x-input.select>
+                                <img class="img-thumbnail" id="driving_license_image_preview" alt="200x200" width="200" src="velzon/assets/images/small/img-3.jpg">
                             </div>
                         </div>
                     </form>
                 </div>
+                  
                 <div class="modal-footer">
                     <a href="javascript:void(0);" class="btn btn-link link-success fw-medium" data-bs-dismiss="modal"><i
                             class="ri-close-line me-1 align-middle"></i> Close</a>
@@ -197,9 +195,13 @@
                 getFormData,
                 ajaxError,
                 formRest,
-                formState
+                formState, 
+                imgPreview, 
             } = formHelper(DeliveryPartnerForm.id);
-
+            imgPreview({
+                inputFileId: "driving_license_image_preview", 
+                imageElId: "driving_license_image", 
+            });
             let {
                 creaetState,
                 updateState, 
