@@ -24,9 +24,9 @@ class AddDeleverPartnerRequest extends FormRequest
     public function rules()
     {
         return [
-            "country_id" => 'required|numeric',
-            "state_id" => 'required|numeric',
-            "city_id" => 'required|numeric',
+            "country_id" => 'required|exists:countries,id|numeric',
+            "state_id" => 'required|exists:states,id|numeric',
+            "city_id" => 'required|exists:cities,id|numeric',
             "first_name" => 'required',
             "last_name" => 'required',
             "email" => 'required|email|unique:users,email',

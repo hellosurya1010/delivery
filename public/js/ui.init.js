@@ -8,6 +8,16 @@ const formHelper = (formId = "No-form") => {
         errorEls.forEach((el) => (el.innerHTML = ""));
     };
 
+    let formSubmitBtn = ({disabled = false}) => {
+        let submitBtn = formEl.submit;
+        submitBtn.disabled = disabled;
+    }
+
+    let beforeSend = () => {
+        clearErrorMessages();
+        formSubmitBtn({disabled: true});
+    }
+
     let getFormData = () => {
         let data = {};
         document
@@ -16,17 +26,25 @@ const formHelper = (formId = "No-form") => {
         return data;
     };
 
+
     const imgPreview = ({ inputFileId, imageElId }) => {
         let fileEl = document.querySelector(`#${inputFileId}`);
         let imgEl = document.querySelector(`#${imageElId}`);
         fileEl.addEventListener("change", function () {
-            const file = fileEl.files[0];
-            const reader = new FileReader();
-            reader.addEventListener("load", function () {
-                imgEl.src = reader.result;
-            });
-            reader.readAsDataURL(file);
+            alert('Hello');
+            const file = this.files[0];
+            const url = URL.createObjectURL(file);
+            imgEl.src = url;
         });
+        // fileEl.addEventListener("change", function () {
+        //     console.log(fileEl, imgEl);
+        //     const file = fileEl.files[0];
+        //     const reader = new FileReader();
+        //     reader.addEventListener("load", function () {
+        //         imgEl.src = reader.result;
+        //     });
+        //     reader.readAsDataURL(file);
+        // });
     };
 
     let formState = () => {
@@ -36,7 +54,6 @@ const formHelper = (formId = "No-form") => {
         let creaetState = ({ before = () => {}, after = () => {} }) => {
             before();
             clearErrorMessages();
-            formRest();
             formEl.dataset.formType = "create";
             if (toggleBtn) {
                 toggleBtn.parentNode.style.visibility = "hidden";
@@ -75,6 +92,7 @@ const formHelper = (formId = "No-form") => {
 
     let ajaxError = () => {
         return (err) => {
+            formSubmitBtn({disabled: false});
             let status = err.status;
             if (status == 422) {
                 let errors = {};
@@ -96,16 +114,21 @@ const formHelper = (formId = "No-form") => {
         };
     };
 
-    formRest = () => formEl.reset();
+    formRest = () => {
+        formSubmitBtn({disabled: false});
+        formEl.reset();
+    };
 
     return {
-        clearErrorMessages,
+        clearErrorMessages, 
         getFormData,
         ajaxError,
         formEl,
         formRest,
+        formSubmitBtn,
         formState,
         imgPreview,
+        beforeSend,
     };
 };
 
@@ -168,8 +191,8 @@ const toastr = ({ bgColor = "secondary", text }) => {
         gravity: "top",
         position: "right",
         offset: {
-            x: 20, 
-            y: 20 
-          },
+            x: 20,
+            y: 20,
+        },
     }).showToast();
 };

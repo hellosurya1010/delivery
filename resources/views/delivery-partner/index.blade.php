@@ -129,7 +129,8 @@
                 <div class="modal-footer">
                     <a href="javascript:void(0);" class="btn btn-link link-success fw-medium" data-bs-dismiss="modal"><i
                             class="ri-close-line me-1 align-middle"></i> Close</a>
-                    <button form="DeliveryPartnerForm" type="submit" class="btn btn-primary ">Submit</button>
+                    <input form="DeliveryPartnerForm" class="btn btn-primary" type="submit" name="submit" value="Submit">
+                    {{-- <button  type="submit" >Submit</button> --}}
                 </div>
             </div>
         </div>
@@ -171,8 +172,8 @@
                         name: 'email',
                     },
                     {
-                        data: 'email',
-                        name: 'email',
+                        data: 'id',
+                        name: 'id',
                     },
                     {
                         data: 'action',
@@ -197,6 +198,7 @@
                 formRest,
                 formState, 
                 imgPreview, 
+                beforeSend, 
             } = formHelper(DeliveryPartnerForm.id);
             imgPreview({
                 inputFileId: "driving_license_image_preview", 
@@ -257,7 +259,7 @@
                         "mimeType": "multipart/form-data",
                         "contentType": false,
                         "data": formData,
-                        beforeSend: clearErrorMessages,
+                        beforeSend: beforeSend,
                         success(res) {
                             formRest();
                             $('.bs-example-modal-lg').modal('hide');

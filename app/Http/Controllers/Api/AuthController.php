@@ -8,6 +8,7 @@ use App\Http\Requests\CreateCustomerRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\AuthService;
+use App\Services\CSCService;
 use App\Services\CustomerService;
 use App\Services\DPService;
 use App\Services\ResponseService;
@@ -191,6 +192,27 @@ class AuthController extends Controller
         $validated = $request->validate(['device_token' => 'required']);
         AuthService::updateDeviceToken(auth()->user(), $validated);
         return (new ResponseService)->message('Device token updated successfully.')->getResponse();
+    }
+
+    public function getCountrires()
+    {
+        return (new ResponseService)->data([
+            'countries' => CSCService::getCountreis()
+        ])->getResponse();
+    }
+
+    public function getStates($countryId)
+    {
+        return (new ResponseService)->data([
+            'states' => CSCService::getStates($countryId)
+        ])->getResponse();
+    }
+
+    public function getCities($stateId)
+    {
+        return (new ResponseService)->data([
+            'cities' => CSCService::getCities($stateId)
+        ])->getResponse();
     }
 
     public function updateCoOrdinates(Request $request)
