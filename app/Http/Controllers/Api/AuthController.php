@@ -197,7 +197,7 @@ class AuthController extends Controller
     public function getCountrires()
     {
         return (new ResponseService)->data([
-            'countries' => CSCService::getCountreis()
+            'countries' => CSCService::getCountries()
         ])->getResponse();
     }
 

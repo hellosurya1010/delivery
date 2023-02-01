@@ -18,7 +18,7 @@ class CSCService extends Service
         return State::where('country_id', $countryId)->get();
     }
 
-    public static function getCountreis()
+    public static function getCountries()
     {
         return Country::all();
     }
