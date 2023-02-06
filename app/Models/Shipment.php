@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shipment extends Model
 {
+    public static $statusOrderPlace = "OrderPlaced";
     use HasFactory;
 }

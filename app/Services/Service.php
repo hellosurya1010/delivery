@@ -7,7 +7,8 @@ use App\Traits\ResourcesTrait;
 use App\Traits\ResponseTrait;
 use Illuminate\Support\Facades\Storage;
 
-class Service {
+class Service
+{
     use ResponseTrait, HelpersTrait, ResourcesTrait;
 
     public static function storeInPublic($path, $file)
@@ -18,4 +19,10 @@ class Service {
         return null;
     }
 
+    public static function debugException($ex)
+    {
+        if (env('APP_DEBUG')) {
+            dd($ex);    
+        }
+    }
 }

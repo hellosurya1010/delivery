@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Customer\ShipmentController as CustomerShipmentController;
+use App\Http\Controllers\Api\DeliveryPartner\ShipmentController as DeliveryPartnerShipmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,16 +28,11 @@ Route::prefix('auth')->group(function () {
     Route::patch('update-device-token', [AuthController::class, 'updateDeviceToken'])->middleware('auth:sanctum');
     Route::patch('update-co-ordinates', [AuthController::class, 'updateCoOrdinates'])->middleware('auth:sanctum');
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-    // Route::post('forgot/password', [AuthController::class, 'forgotPassword']);
-    // Route::post('change/{requestFor}', [AuthController::class, 'changeChredentials'])->middleware('auth:sanctum');
-    // Route::post('check/password', [AuthController::class, 'checkPassword'])->middleware('auth:sanctum');
-    // Route::post('check/{reqeustFor}', [AuthController::class, 'checkChredentials']);
-    // Route::get('search/{reqeustFor}/{id?}', [HomePageController::class, 'search']);
-    // Route::post('status', [AuthController::class, 'status'])->middleware('auth:sanctum');
-    // Route::post('approved', [AuthController::class, 'approved'])->middleware('auth:sanctum');
-    // Route::get('family-tokens', [AuthController::class, 'familyTokens'])->middleware('auth:sanctum');
-    // Route::post('social/login', [AuthController::class, 'socialLogin']);
-    // Route::post('register', [AuthController::class, 'register']);
+});
+
+Route::group(["middleware" => "auth:sanctum"], function () {
+    Route::apiResource('customer-shipment.action', CustomerShipmentController::class);
+    Route::apiResource('delivery-partner-shipment.action', DeliveryPartnerShipmentController::class);
 });
 
 Route::get('check/{slug}/exists', [AuthController::class, 'checkExists']);

@@ -120,7 +120,7 @@
                                 <x-input.image-upload name="driving_license_image" label="Driving license image"
                                     id='driving_license_image'>
                                 </x-input.image-upload>
-                                <img class="img-thumbnail" id="driving_license_image_preview" alt="200x200" width="200" src="velzon/assets/images/small/img-3.jpg">
+                                {{-- <img class="img-thumbnail" id="driving_license_image_preview" alt="200x200" width="200" src="velzon/assets/images/small/img-3.jpg"> --}}
                             </div>
                         </div>
                     </form>
@@ -200,10 +200,10 @@
                 imgPreview, 
                 beforeSend, 
             } = formHelper(DeliveryPartnerForm.id);
-            imgPreview({
-                inputFileId: "driving_license_image_preview", 
-                imageElId: "driving_license_image", 
-            });
+            // imgPreview({
+            //     inputFileId: "driving_license_image_preview", 
+            //     imageElId: "driving_license_image", 
+            // });
             let {
                 creaetState,
                 updateState, 
@@ -266,6 +266,7 @@
                             SwalModal({
                                 title: "New delivery partner added."
                             });
+                            location.reload();
                         },
                         error: ajaxError()
                     });

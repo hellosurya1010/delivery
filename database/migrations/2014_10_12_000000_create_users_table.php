@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('email')->nullable();
             $table->string('role')->nullable();
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('device_token')->nullable();

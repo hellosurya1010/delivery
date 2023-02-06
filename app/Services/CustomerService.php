@@ -13,7 +13,8 @@ class CustomerService extends Service
     {
         DB::beginTransaction();
         try {
-            $user = new User();
+            $user = User::where('phone', $fields['phone'])->first();
+            if(!$user) $user = new User();
             $user->first_name = $fields['first_name'];
             $user->phone = $fields['phone'];
             $user->role = User::$customer;
@@ -24,8 +25,8 @@ class CustomerService extends Service
             $user->save();
             DB::commit();
         } catch (\Exception $ex) {
-            dd($ex);
             DB::rollback();
+            self::debugException($ex);
         }
         return $user;
     }

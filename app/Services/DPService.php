@@ -19,7 +19,8 @@ class DPService extends Service
     {
         DB::beginTransaction();
         try {
-            $user = new User();
+            $user = User::where('phone', $fields['phone'])->first();
+            if(!$user) $user = new User();
             $user->first_name = $fields['first_name'];
             $user->last_name = $fields['last_name'];
             $user->email = $fields['email'];
@@ -44,6 +45,7 @@ class DPService extends Service
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollback();
+            self::debugException($ex);
         }
         return $user;
     }

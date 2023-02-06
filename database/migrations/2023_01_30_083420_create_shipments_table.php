@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Shipment;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,10 +25,11 @@ class CreateShipmentsTable extends Migration
             $table->timestamp('to_delivery_at')->nullable();
             $table->float('price')->nullable();
             $table->float('distance')->nullable();
-            $table->string('pick_lat')->nullable();
-            $table->string('pick_lon')->nullable();
-            $table->string('delivery_lat')->nullable();
-            $table->string('delivery_lon')->nullable();
+            $table->string('status')->default(Shipment::$statusOrderPlace);
+            $table->string('pickup_lat')->nullable();
+            $table->string('pickup_lon')->nullable();
+            $table->string('dropup_lat')->nullable();
+            $table->string('dropup_lon')->nullable();
             $table->timestamps();
         });
     }

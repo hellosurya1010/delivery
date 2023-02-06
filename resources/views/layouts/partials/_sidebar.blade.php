@@ -40,6 +40,11 @@
                         <i class="ri-honour-line"></i> <span data-key="t-widgets">Delivery partners</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('settings.index') }}">
+                        <i class="ri-honour-line"></i> <span data-key="t-widgets">Settings</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->
