@@ -43,7 +43,7 @@ class ShipmentService extends Service
         $tokos = DeliveryPartner::nearby([$lat, $lon], $kms)->get();
     }
 
-    public function findShipment($id)
+    public static function findShipment($id)
     {
         return Shipment::find($id);
     }

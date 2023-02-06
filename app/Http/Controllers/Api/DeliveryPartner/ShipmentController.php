@@ -52,7 +52,16 @@ class ShipmentController extends Controller
      */
     public function update(Request $request, $action, $id)
     {
+
         $shipment = ShipmentService::findShipment($id);
+        if($action == 'accept'){
+            $shipment->status = Shipment::$statusAccepted;
+            $shipment->save();
+        }else if($action == 'delivered'){
+            $shipment->status = Shipment::$statusDelivered;
+            $shipment->save();
+        }
+        return (new ResponseService)->data(['shipments' => $shipment])->message("Shipment $action")->getResponse();
     }
 
     /**
