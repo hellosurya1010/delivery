@@ -36,7 +36,6 @@ class AuthController extends Controller
 
     public function addDeleverPartner(AddDeleverPartnerRequest $request)
     {
-        dd($request->validated());
         $partner = DPService::createOrUpdatePartner($request->validated());
         return (new ResponseService)->data(["delivery_partner" =>  $partner])->getResponse();
     }

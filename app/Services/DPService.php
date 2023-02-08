@@ -17,7 +17,7 @@ class DPService extends Service
 
     public static function createOrUpdatePartner($fields)
     {
-        DB::beginTransaction();
+        // DB::beginTransaction();
         try {
             $user = User::where('phone', $fields['phone'])->first();
             if (!$user) $user = new User();
@@ -32,8 +32,6 @@ class DPService extends Service
             $user->country_id = $fields['country_id'];
             $user->state_id = $fields['state_id'];
             $user->city_id = $fields['city_id'];
-            $user->is_approved = $fields['is_approved'];
-            $user->is_active = $fields['is_active'];
             $user->save();
             $dv = $user->deliveryPartner;
             if (!$dv) {
@@ -46,9 +44,9 @@ class DPService extends Service
             if (is_file($fields['driving_license_image'])) $dv->driving_license_image = Service::storeInPublic('driving_license_image', $fields['driving_license_image']);
             if (is_file($fields['profile_picture'])) $dv->profile_picture = Service::storeInPublic('profile_picture', $fields['driving_license_image']);
             $dv->save();
-            DB::commit();
+            // DB::commit();
         } catch (\Exception $ex) {
-            DB::rollback();
+            // DB::rollback();
             self::debugException($ex);
         }
         return $user;
