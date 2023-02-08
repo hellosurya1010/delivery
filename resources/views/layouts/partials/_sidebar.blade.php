@@ -31,18 +31,23 @@
             </div>
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('dashboard') }}">
+                        <i class="ri-dashboard-2-line"></i> <span data-key="t-widgets">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link menu-link" href="{{ route('customers.index') }}">
-                        <i class="ri-honour-line"></i> <span data-key="t-widgets">Cutomers</span>
+                        <i class="ri-user-3-fill"></i> <span data-key="t-widgets">Cutomers</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="{{ route('delivery-partners.index') }}">
-                        <i class="ri-honour-line"></i> <span data-key="t-widgets">Delivery partners</span>
+                        <i class="ri-truck-fill"></i> <span data-key="t-widgets">Delivery partners</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="{{ route('settings.index') }}">
-                        <i class="ri-honour-line"></i> <span data-key="t-widgets">Settings</span>
+                        <i class=" ri-settings-2-fill"></i> <span data-key="t-widgets">Settings</span>
                     </a>
                 </li>
             </ul>

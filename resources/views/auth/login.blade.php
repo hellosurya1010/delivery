@@ -75,7 +75,7 @@
                                             <input type="email" class="form-control" name="email" id="email"
                                                 placeholder="Enter email">
                                             @error('email')
-                                            <div class="text text-danger">
+                                                <div class="text text-danger">
                                                     {{ $message }}
                                                 </div>
                                             @enderror
@@ -88,7 +88,8 @@
                                             </div>
                                             <label class="form-label" for="password-input">Password</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input type="password" name="password" class="form-control pe-5 password-input"
+                                                <input type="password" name="password"
+                                                    class="form-control pe-5 password-input"
                                                     placeholder="Enter password" id="password-input">
                                                 <button
                                                     class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
@@ -186,6 +187,15 @@
     <script src="/velzon/assets/js/pages/particles.app.js"></script>
     <!-- password-addon init -->
     <script src="/velzon/assets/js/pages/password-addon.init.js"></script>
+
+    <script>
+            // let passEyeBtn = document.getElementById('password-addon');
+            // let passwordInputEl = document.getElementById('password-input');
+            // passEyeBtn.addEventListener('click', () => {
+            //     passwordInputEl.type = passwordInputEl.type == "password" ? 'text' : "password";
+            //     console.log( passwordInputEl.type);
+            // })
+    </script>
 </body>
 
 </html>

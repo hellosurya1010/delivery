@@ -28,7 +28,7 @@ return new class extends Migration
             $table->foreignId('country_id')->nullable();
             $table->foreignId('state_id')->nullable();
             $table->foreignId('city_id')->nullable();
-            $table->string('profile_picture', 2048)->nullable();
+            $table->string('profile_picture', 2048)->default("default/avatar.png");
             $table->timestamps();
         });
     }

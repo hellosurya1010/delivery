@@ -17,7 +17,7 @@ class DataTableController extends Controller
             ->addColumn('profile_picture', function ($row) {
                 return  '<div class="avatar-group">
                 <a href="javascript: void(0);" class="avatar-group-item" data-img="avatar-3.jpg" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Username" data-bs-original-title="Username">
-                    <img src="assets/images/users/avatar-3.jpg" alt="" class="rounded-circle avatar-xxs">
+                    <img src="'.asset("storage/$row->profile_picture").'" alt="" class="rounded-circle avatar-xxs">
                 </a>
             </div>';
                 // return  "<h1></h1>";
@@ -50,7 +50,7 @@ class DataTableController extends Controller
             ->addColumn('profile_picture', function ($row) {
                 return  '<div class="avatar-group">
                 <a href="javascript: void(0);" class="avatar-group-item" data-img="avatar-3.jpg" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Username" data-bs-original-title="Username">
-                    <img src="assets/images/users/avatar-3.jpg" alt="" class="rounded-circle avatar-xxs">
+                    <img src="'.asset("storage/$row->profile_picture").'" alt="" class="rounded-circle avatar-xxs">
                 </a>
             </div>';
                 // return  "<h1></h1>";
