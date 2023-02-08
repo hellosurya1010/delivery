@@ -17,14 +17,16 @@ class Select extends Component
     public $name;
     public $toSelect;
     public $dropdownParent;
+    public $selectOption;
 
-    public function __construct($name, $id, $label, $options=[], $toSelect="", $dropdownParent='')
+    public function __construct($name, $id, $label, $options=[], $toSelect="", $dropdownParent='', $selectOption = true)
     {
         $this->id = $id;
         $this->label = $label;
         $this->options = $options;
         $this->name = $name;
         $this->dropdownParent = $dropdownParent;
+        $this->selectOption = $selectOption;
         $this->toSelect = $toSelect;
     }
 

@@ -69,7 +69,7 @@ class DataTableController extends Controller
                 return $row->id;
             })
             ->addColumn('action', function ($row) {
-                return "<button type='button' onclick='showDeliveryPartnerDetials(this)' data-user='".json_encode($row)."' class='btn btn-primary waves-effect waves-light' data-bs-toggle='modal'
+                return "<button type='button' disabled onclick='showDeliveryPartnerDetials(this)' data-user='".json_encode($row)."' class='btn btn-primary waves-effect waves-light' data-bs-toggle='modal'
                 data-bs-target='.bs-example-modal-lg'><i class='las la-eye'></i></button>";
             })
             ->escapeColumns([])

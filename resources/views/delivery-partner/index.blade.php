@@ -114,7 +114,6 @@
                                 <x-input.image-upload name="profile_picture" label="Profile picture"
                                     id='profile_picture'>
                                 </x-input.image-upload>
-                                
                             </div>
                             <div class="col-md-6  mt-1 form-group">
                                 <x-input.image-upload name="driving_license_image" label="Driving license image"
@@ -122,14 +121,30 @@
                                 </x-input.image-upload>
                                 {{-- <img class="img-thumbnail" id="driving_license_image_preview" alt="200x200" width="200" src="velzon/assets/images/small/img-3.jpg"> --}}
                             </div>
-                        </div>
+
+                            @php
+                            $dv = new App\Models\DeliveryPartner();
+                            @endphp
+
+                            <div class="col-md-6  mt-1 form-group"> 
+                                <x-input.select name="is_approved" label="Is approved" :selectOption="false" toSelect="{{ $dv::$approved }}" dropdownParent=".bs-example-modal-lg"
+                                    :options="[$dv::$approved => 'Approved', $dv::$rejected => 'Rejected']" id='is_approved'>
+                                </x-input.select>
+                            </div>
+                            <div class="col-md-6  mt-1 form-group">
+                                <x-input.select name="is_active" label="Is active" :selectOption="false" toSelect="{{ $dv::$inActive }}" dropdownParent=".bs-example-modal-lg"
+                                    :options="[$dv::$active => 'Active', $dv::$inActive => 'In active']" id='is_active'>
+                                </x-input.select>
+                            </div>
+                        </div> 
                     </form>
                 </div>
-                  
+
                 <div class="modal-footer">
                     <a href="javascript:void(0);" class="btn btn-link link-success fw-medium" data-bs-dismiss="modal"><i
                             class="ri-close-line me-1 align-middle"></i> Close</a>
-                    <input form="DeliveryPartnerForm" class="btn btn-primary" type="submit" name="submit" value="Submit">
+                    <input form="DeliveryPartnerForm" class="btn btn-primary" type="submit" name="submit"
+                        value="Submit">
                     {{-- <button  type="submit" >Submit</button> --}}
                 </div>
             </div>
@@ -196,9 +211,9 @@
                 getFormData,
                 ajaxError,
                 formRest,
-                formState, 
-                imgPreview, 
-                beforeSend, 
+                formState,
+                imgPreview,
+                beforeSend,
             } = formHelper(DeliveryPartnerForm.id);
             // imgPreview({
             //     inputFileId: "driving_license_image_preview", 
@@ -206,8 +221,8 @@
             // });
             let {
                 creaetState,
-                updateState, 
-                stateToggler, 
+                updateState,
+                stateToggler,
             } = formState();
 
             stateToggler(`delivery-partner-from-toggler`);
@@ -221,9 +236,11 @@
             });
 
             showDeliveryPartnerDetials = (buttonEl) => {
-                updateState({before(){
-                    myLargeModalLabel.innerText = 'Update delivery partner';
-                }});
+                updateState({
+                    before() {
+                        myLargeModalLabel.innerText = 'Update delivery partner';
+                    }
+                });
                 let user = JSON.parse(buttonEl.dataset.user);
                 let form = DeliveryPartnerForm;
                 form.email.value = user.email;

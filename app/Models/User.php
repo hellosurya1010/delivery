@@ -20,6 +20,7 @@ class User extends Authenticatable
 
     public static $customer = "Customer";
     public static $deliveryPartner = "DeliveryPartner";
+    public static $admin = "Admin";
 
     /**
      * The attributes that are mass assignable.

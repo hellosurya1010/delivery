@@ -23,10 +23,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return redirect()->route('dashboard');
     return view('welcome');
 });
 
-Route::middleware(['auth', config('jetstream.auth_session'), 'verified'])->group(function () {
+Route::middleware(['auth', 'isAdmin', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource("customers", CustomerController::class)->name('admin', 'customers');
     Route::resource("delivery-partners", DeliveryPartnerController::class)->name('admin', 'delivery-partner');

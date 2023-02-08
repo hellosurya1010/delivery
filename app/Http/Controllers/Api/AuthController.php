@@ -36,6 +36,7 @@ class AuthController extends Controller
 
     public function addDeleverPartner(AddDeleverPartnerRequest $request)
     {
+        dd($request->validated());
         $partner = DPService::createOrUpdatePartner($request->validated());
         return (new ResponseService)->data(["delivery_partner" =>  $partner])->getResponse();
     }
@@ -43,39 +44,6 @@ class AuthController extends Controller
     {
         $customer = CustomerService::creareOrUpdate($request->validated());
         return (new ResponseService)->data(["customer" =>  $customer])->getResponse();
-    }
-
-    public function register(Request $request, User $user, $slug)
-    {
-
-        if ($slug == 'user') {
-            $validated = $request->validate([
-                'profile_picture' => 'nullable|image',
-                'name' => 'required',
-                'role' => 'required|in:Doctor,Patient',
-                'email' => 'required|email|unique:users,email',
-                'phone' => 'required|unique:users,phone',
-                'password' => 'required',
-                'consultation_fees' => 'nullable',
-                'medicine_type_id' => 'nullable',
-            ]);
-            $user->role = $request->role;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
-            $user->password = Hash::make($request->password);
-            $user->role = $request->role;
-            if ($request->hasFile('profile_picture')) {
-                $user->profile_pic = $this->storeImage($request->file('profile_picture'), 'profile_picture');
-                $validated['profile_picture'] = $user->profile_pic;
-            }
-            $user->save();
-        }
-
-        $token = $user->createToken('tokens')->plainTextToken;
-        unset($validated['password']);
-        $validated['unique_id'] = $user->unique_id;
-        return response()->json(['message' => 'Registeded Successfully', 'data' => $validated, 'token' => $token], 201);
     }
 
 

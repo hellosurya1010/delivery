@@ -31,8 +31,12 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::group(["middleware" => "auth:sanctum"], function () {
-    Route::apiResource('customer-shipment.action', CustomerShipmentController::class);
-    Route::apiResource('delivery-partner-shipment.action', DeliveryPartnerShipmentController::class);
+    Route::group(["middleware" => ['isApiCustomer']], function () {
+        Route::apiResource('customer-shipment.action', CustomerShipmentController::class);
+    });
+    Route::group(["middleware" => ['isApiDeliveryPartner']], function () {
+        Route::apiResource('delivery-partner-shipment.action', DeliveryPartnerShipmentController::class);
+    });
 });
 
 Route::get('check/{slug}/exists', [AuthController::class, 'checkExists']);

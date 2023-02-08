@@ -8,15 +8,15 @@ const formHelper = (formId = "No-form") => {
         errorEls.forEach((el) => (el.innerHTML = ""));
     };
 
-    let formSubmitBtn = ({disabled = false}) => {
+    let formSubmitBtn = ({ disabled = false }) => {
         let submitBtn = formEl.submit;
         submitBtn.disabled = disabled;
-    }
+    };
 
     let beforeSend = () => {
         clearErrorMessages();
-        formSubmitBtn({disabled: true});
-    }
+        formSubmitBtn({ disabled: true });
+    };
 
     let getFormData = () => {
         let data = {};
@@ -26,12 +26,11 @@ const formHelper = (formId = "No-form") => {
         return data;
     };
 
-
     const imgPreview = ({ inputFileId, imageElId }) => {
         let fileEl = document.querySelector(`#${inputFileId}`);
         let imgEl = document.querySelector(`#${imageElId}`);
         fileEl.addEventListener("change", function () {
-            alert('Hello');
+            alert("Hello");
             const file = this.files[0];
             const url = URL.createObjectURL(file);
             imgEl.src = url;
@@ -92,7 +91,7 @@ const formHelper = (formId = "No-form") => {
 
     let ajaxError = () => {
         return (err) => {
-            formSubmitBtn({disabled: false});
+            formSubmitBtn({ disabled: false });
             let status = err.status;
             if (status == 422) {
                 let errors = {};
@@ -115,12 +114,12 @@ const formHelper = (formId = "No-form") => {
     };
 
     formRest = () => {
-        formSubmitBtn({disabled: false});
+        formSubmitBtn({ disabled: false });
         formEl.reset();
     };
 
     return {
-        clearErrorMessages, 
+        clearErrorMessages,
         getFormData,
         ajaxError,
         formEl,
@@ -132,10 +131,16 @@ const formHelper = (formId = "No-form") => {
     };
 };
 
-$(document).ready(function () {
+const intiSelect2 = () => {
     $(".single-select2").each(function () {
-        console.log($(this));
+        $(this).select2({
+            dropdownParent: $(this).data("dropdownparent"),
+        });
     });
+};
+
+$(document).ready(function () {
+    intiSelect2();
 });
 
 const SwalModal = ({
@@ -183,7 +188,7 @@ const SwalModal = ({
 const toastr = ({ bgColor = "secondary", text }) => {
     Toastify({
         text,
-        duration: 3000,
+        duration: 6000,
         style: {
             background: `var(--vz-${bgColor})`,
         },
