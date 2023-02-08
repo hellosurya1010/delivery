@@ -5,23 +5,23 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Sign In | Velzon - Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="/velzon/assets/images/favicon.ico">
+    <title>Star One</title>
+    <link rel="shortcut icon" href="{{ asset('/velzon/assets/images/favicon.png') }}">
 
     <!-- Layout config Js -->
-    <script src="/velzon/assets/js/layout.js"></script>
+    <script src="{{ asset('/velzon/assets/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
-    <link href="/velzon/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/velzon/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="/velzon/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/velzon/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="/velzon/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/velzon/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
-    <link href="/velzon/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/velzon/assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -48,10 +48,10 @@
                         <div class="text-center mt-sm-5 mb-4 text-white-50">
                             <div>
                                 <a href="index.html" class="d-inline-block auth-logo">
-                                    <img src="/velzon/assets/images/logo-light.png" alt="" height="20">
+                                    <img src="{{ asset('/images/star-one-logo.png') }}" alt="" height="50">
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
+                            {{-- <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p> --}}
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center mt-2">
                                     <h5 class="text-primary">Welcome Back !</h5>
-                                    <p class="text-muted">Sign in to continue to Velzon.</p>
+                                    <p class="text-muted">Sign in to continue to Star-one delivery.</p>
                                 </div>
                                 <div class="p-2 mt-4">
                                     <form method="POST" action="{{ route('login') }}">
@@ -157,12 +157,12 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center">
-                            <p class="mb-0 text-muted">&copy;
+                            {{-- <p class="mb-0 text-muted">&copy;
                                 <script>
                                     document.write(new Date().getFullYear())
                                 </script> Velzon. Crafted with <i
                                     class="mdi mdi-heart text-danger"></i> by Themesbrand
-                            </p>
+                            </p> --}}
                         </div>
                     </div>
                 </div>
