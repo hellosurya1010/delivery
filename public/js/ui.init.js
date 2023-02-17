@@ -133,9 +133,13 @@ const formHelper = (formId = "No-form") => {
 
 const intiSelect2 = () => {
     $(".single-select2").each(function () {
-        $(this).select2({
-            dropdownParent: $(this).data("dropdownparent"),
-        });
+        if ($(this).data("dropdownparent")) {
+            $(this).select2({
+                dropdownParent: $(this).data("dropdownparent"),
+            });
+        } else {
+            $(this).select2();
+        }
     });
 };
 

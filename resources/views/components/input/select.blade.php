@@ -6,10 +6,7 @@
             @if ($selectOption)
                 <option value="">Select</option>
             @endif
-            @foreach ($options as $value => $text)
-                <option @if ($toSelect == $value) selected @endif value="{{ $value }}">{{ $text }}
-                </option>
-            @endforeach
+           {!! $options !!}
         </select>
         <p class="input-error" data-error="{{ $name }}"></p>
     </div>

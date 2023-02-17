@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddDeleverPartnerRequest;
 use App\Http\Requests\CreateCustomerRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Setting;
 use App\Models\User;
 use App\Services\AuthService;
 use App\Services\CSCService;
@@ -32,6 +33,12 @@ class AuthController extends Controller
         }
         // return (new ResponseService)->data(['cities' => $states])->getResponse();
         return (new ResponseService)->data(["is_$slug" . "_exists" => $exists])->getResponse();
+    }
+
+    public function getSettings()
+    {
+        $settings = Setting::all();
+        return (new ResponseService)->data(["settings" =>  $settings])->getResponse();
     }
 
     public function addDeleverPartner(AddDeleverPartnerRequest $request)
@@ -64,6 +71,11 @@ class AuthController extends Controller
     }
 
 
+    public function hello()
+    {
+        $user = User::all();
+        return response()->json([ "user" => $user]);
+    }
 
     public function logout(Request $request)
     {

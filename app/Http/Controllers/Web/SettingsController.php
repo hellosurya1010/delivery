@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SettingsRequest;
 use App\Models\Setting;
 use App\Services\CSCService;
 use Illuminate\Http\Request;
@@ -20,9 +21,9 @@ class SettingsController extends Controller
         $shipment = $settgins->where('name', "shipment")->first();
         $map = $settgins->where('name', "map")->first();
         $currencies = CSCService::getCurrencies();
-        $currencies = CSCService::currencyConvert();
-        // dd($currencies->toArray(), array_column($currencies->toArray(), 'code'));
-        return view('settings.index', compact('shipment', "map"));
+
+        // dd($currencies->first()->name_and_symbol, $currencies->toArray(), array_column($currencies->toArray(), 'code'));
+        return view('settings.index', compact('shipment', "map", "currencies"));
     }
 
     /**
@@ -75,9 +76,23 @@ class SettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SettingsRequest $request, $id)
     {
-        //
+        $settgins = Setting::find($id);
+        // dd($request->all());
+        if($request->settgins_type == "shipmentSettings"){
+            $settgins->data = [
+                'price_per_miles' => $request->price_per_miles,
+                'price_per_kilometer' => $request->price_per_kilometer,
+                'currency_id' => $request->currency_id,
+            ];
+        }else if($request->settgins_type == "mapAPISettings"){
+            $settgins->data = [
+                'key' => $request->key,
+            ];
+        }
+        $settgins->save();
+        return redirect()->route('settings.index');
     }
 
     /**

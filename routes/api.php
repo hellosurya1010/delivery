@@ -31,6 +31,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::group(["middleware" => "auth:sanctum"], function () {
+    Route::get('settings', [AuthController::class, 'getSettings']);
     Route::group(["middleware" => ['isApiCustomer']], function () {
         Route::apiResource('customer-shipment.action', CustomerShipmentController::class);
     });

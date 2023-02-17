@@ -30,8 +30,8 @@ Route::get('/', function () {
 Route::middleware(['auth', 'isAdmin', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource("customers", CustomerController::class)->name('admin', 'customers');
-    Route::resource("delivery-partners", DeliveryPartnerController::class)->name('admin', 'delivery-partner');
-    Route::resource('settings', SettingsController::class)->name('settings', 'settings');
+    Route::resource("delivery-partners", DeliveryPartnerController::class)->name('admin', 'delivery-partner');  
+Route::resource('settings', SettingsController::class)->name('settings', 'settings');
 });
 
 Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], function () {
