@@ -18,15 +18,16 @@ class ComposerStaticInitba62615a066125bfd045d9941aa92c45
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
@@ -35,7 +36,6 @@ class ComposerStaticInitba62615a066125bfd045d9941aa92c45
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
@@ -194,6 +194,8 @@ class ComposerStaticInitba62615a066125bfd045d9941aa92c45
         array (
             'Asm89\\Stack\\' => 12,
             'App\\' => 4,
+            'AmrShawky\\LaravelCurrency\\' => 26,
+            'AmrShawky\\' => 10,
         ),
     );
 
@@ -572,6 +574,14 @@ class ComposerStaticInitba62615a066125bfd045d9941aa92c45
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'AmrShawky\\LaravelCurrency\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amrshawky/laravel-currency/src',
+        ),
+        'AmrShawky\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amrshawky/currency/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -592,6 +602,21 @@ class ComposerStaticInitba62615a066125bfd045d9941aa92c45
     );
 
     public static $classMap = array (
+        'AmrShawky\\API' => __DIR__ . '/..' . '/amrshawky/currency/src/API.php',
+        'AmrShawky\\Currency' => __DIR__ . '/..' . '/amrshawky/currency/src/Currency.php',
+        'AmrShawky\\CurrencyConversion' => __DIR__ . '/..' . '/amrshawky/currency/src/CurrencyConversion.php',
+        'AmrShawky\\CurrencyFactory' => __DIR__ . '/..' . '/amrshawky/currency/src/CurrencyFactory.php',
+        'AmrShawky\\CurrencyFluctuations' => __DIR__ . '/..' . '/amrshawky/currency/src/CurrencyFluctuations.php',
+        'AmrShawky\\CurrencyHistoricalRates' => __DIR__ . '/..' . '/amrshawky/currency/src/CurrencyHistoricalRates.php',
+        'AmrShawky\\CurrencyLatestRates' => __DIR__ . '/..' . '/amrshawky/currency/src/CurrencyLatestRates.php',
+        'AmrShawky\\CurrencyRates' => __DIR__ . '/..' . '/amrshawky/currency/src/CurrencyRates.php',
+        'AmrShawky\\CurrencyRatesProxy' => __DIR__ . '/..' . '/amrshawky/currency/src/CurrencyRatesProxy.php',
+        'AmrShawky\\CurrencyTimeSeriesRates' => __DIR__ . '/..' . '/amrshawky/currency/src/CurrencyTimeSeriesRates.php',
+        'AmrShawky\\Exceptions\\RequestException' => __DIR__ . '/..' . '/amrshawky/currency/src/Exceptions/RequestException.php',
+        'AmrShawky\\LaravelCurrency\\CurrencyServiceProvider' => __DIR__ . '/..' . '/amrshawky/laravel-currency/src/CurrencyServiceProvider.php',
+        'AmrShawky\\LaravelCurrency\\Facade\\Currency' => __DIR__ . '/..' . '/amrshawky/laravel-currency/src/Facade/Currency.php',
+        'AmrShawky\\Traits\\HttpRequest' => __DIR__ . '/..' . '/amrshawky/currency/src/Traits/HttpRequest.php',
+        'AmrShawky\\Traits\\ParamsOverload' => __DIR__ . '/..' . '/amrshawky/currency/src/Traits/ParamsOverload.php',
         'App\\Actions\\Fortify\\CreateNewUser' => __DIR__ . '/../..' . '/app/Actions/Fortify/CreateNewUser.php',
         'App\\Actions\\Fortify\\PasswordValidationRules' => __DIR__ . '/../..' . '/app/Actions/Fortify/PasswordValidationRules.php',
         'App\\Actions\\Fortify\\ResetUserPassword' => __DIR__ . '/../..' . '/app/Actions/Fortify/ResetUserPassword.php',
@@ -613,8 +638,11 @@ class ComposerStaticInitba62615a066125bfd045d9941aa92c45
         'App\\Http\\Controllers\\Web\\DeliveryPartnerController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/DeliveryPartnerController.php',
         'App\\Http\\Controllers\\Web\\SettingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/SettingsController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\Api\\IsCustomer' => __DIR__ . '/../..' . '/app/Http/Middleware/Api/IsCustomer.php',
+        'App\\Http\\Middleware\\Api\\IsDeliveryPartner' => __DIR__ . '/../..' . '/app/Http/Middleware/Api/IsDeliveryPartner.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
+        'App\\Http\\Middleware\\IsAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/IsAdmin.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
@@ -631,6 +659,7 @@ class ComposerStaticInitba62615a066125bfd045d9941aa92c45
         'App\\Models\\City' => __DIR__ . '/../..' . '/app/Models/City.php',
         'App\\Models\\Country' => __DIR__ . '/../..' . '/app/Models/Country.php',
         'App\\Models\\CountryCode' => __DIR__ . '/../..' . '/app/Models/CountryCode.php',
+        'App\\Models\\Currency' => __DIR__ . '/../..' . '/app/Models/Currency.php',
         'App\\Models\\Customer' => __DIR__ . '/../..' . '/app/Models/Customer.php',
         'App\\Models\\Delivery' => __DIR__ . '/../..' . '/app/Models/Delivery.php',
         'App\\Models\\DeliveryPartner' => __DIR__ . '/../..' . '/app/Models/DeliveryPartner.php',
@@ -647,6 +676,7 @@ class ComposerStaticInitba62615a066125bfd045d9941aa92c45
         'App\\Providers\\FortifyServiceProvider' => __DIR__ . '/../..' . '/app/Providers/FortifyServiceProvider.php',
         'App\\Providers\\JetstreamServiceProvider' => __DIR__ . '/../..' . '/app/Providers/JetstreamServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Providers\\TelescopeServiceProvider' => __DIR__ . '/../..' . '/app/Providers/TelescopeServiceProvider.php',
         'App\\Services\\AuthService' => __DIR__ . '/../..' . '/app/Services/AuthService.php',
         'App\\Services\\CSCService' => __DIR__ . '/../..' . '/app/Services/CSCService.php',
         'App\\Services\\CustomerService' => __DIR__ . '/../..' . '/app/Services/CustomerService.php',
@@ -887,8 +917,10 @@ class ComposerStaticInitba62615a066125bfd045d9941aa92c45
         'DASPRiD\\Enum\\Exception\\UnserializeNotSupportedException' => __DIR__ . '/..' . '/dasprid/enum/src/Exception/UnserializeNotSupportedException.php',
         'DASPRiD\\Enum\\NullValue' => __DIR__ . '/..' . '/dasprid/enum/src/NullValue.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
+        'Database\\Seeders\\AdminSeeder' => __DIR__ . '/../..' . '/database/seeders/AdminSeeder.php',
         'Database\\Seeders\\CitiesTableSeeder' => __DIR__ . '/../..' . '/database/seeders/CitiesTableSeeder.php',
         'Database\\Seeders\\CountriesTableSeeder' => __DIR__ . '/../..' . '/database/seeders/CountriesTableSeeder.php',
+        'Database\\Seeders\\CurrencySeeder' => __DIR__ . '/../..' . '/database/seeders/CurrencySeeder.php',
         'Database\\Seeders\\CustomerSeeder' => __DIR__ . '/../..' . '/database/seeders/CustomerSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\DeliveryPartnerSeeder' => __DIR__ . '/../..' . '/database/seeders/DeliveryPartnerSeeder.php',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Services\CSCService;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -18,6 +19,9 @@ class SettingsController extends Controller
         $settgins = Setting::all();
         $shipment = $settgins->where('name', "shipment")->first();
         $map = $settgins->where('name', "map")->first();
+        $currencies = CSCService::getCurrencies();
+        $currencies = CSCService::currencyConvert();
+        // dd($currencies->toArray(), array_column($currencies->toArray(), 'code'));
         return view('settings.index', compact('shipment', "map"));
     }
 

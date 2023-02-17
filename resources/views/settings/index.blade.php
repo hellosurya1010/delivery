@@ -13,10 +13,20 @@
                 </div>
                 <div class="card-body">
                     <form id="shipmentSettings">
-                        <div class="col-md-6  mt-1 form-group">
-                            <x-input.input-field label="Price per mile" name="price" value="{{ $shipment->data['price'] }}"
-                                id="price">
+                        <div class="col-md-4  mt-1 form-group">
+                            <x-input.input-field label="Price per mile" name="price_per_miles" value="{{ $shipment->data['price_per_miles'] }}"
+                                id="price_per_miles">
                             </x-input.input-field>
+                        </div>
+                        <div class="col-md-4  mt-1 form-group">
+                            <x-input.input-field label="Price per kilometer" name="price_per_kilometer" value="{{ $shipment->data['price_per_kilometer'] }}"
+                                id="price_per_kilometer">
+                            </x-input.input-field>
+                        </div>
+                        <div class="col-md-4  mt-1 form-group"> 
+                            <x-input.select name="is_approved" label="Is approved" :selectOption="false" toSelect="{{ $dv::$approved }}" dropdownParent=".bs-example-modal-lg"
+                                :options="[$dv::$approved => 'Approved', $dv::$rejected => 'Rejected']" id='is_approved'>
+                            </x-input.select>
                         </div>
                         <button type="button" class="btn btn-primary">Submit</button>
                     </form>

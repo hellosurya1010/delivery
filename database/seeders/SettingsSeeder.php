@@ -14,10 +14,12 @@ class SettingsSeeder extends Seeder
      */
     public function run()
     {
+        Setting::truncate();
         $settings = [
             "shipment" => [
-                "price" => "100",
-                "distance_unit" => "mile",
+                "price_per_miles" => "100",
+                "price_per_kilometer" => "100",
+                "currency_id" => "1"
             ],
             "map" =>  [
                 "key" => ""
