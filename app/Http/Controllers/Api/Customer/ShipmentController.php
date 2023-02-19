@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateShipmentRequest;
 use App\Http\Resources\ShipmentResource;
+use App\Models\Shipment;
 use App\Services\ResponseService;
 use App\Services\Shipment\Customer;
 use App\Services\Shipment\Service as ShipmentService;
@@ -15,7 +16,7 @@ class ShipmentController extends Controller
 
     public function getUnAccepted()
     {
-        $shipments = Customer::unAccepted(auth()->user());
+        $shipments = Customer::getByStatus(auth()->user(), Shipment::$statusOrderPlaced);
         return (new ResponseService)->data([
             'shipments' => ShipmentResource::collection($shipments)
         ])->getResponse();
@@ -23,7 +24,7 @@ class ShipmentController extends Controller
 
     public function getAcepted()
     {
-        $shipments = DeliveryPartner::getByStatus(auth()->user(), Shipment::$statusAccepted);
+        $shipments = Customer::getByStatus(auth()->user(), Shipment::$statusAccepted);
         return (new ResponseService)->data([
             'shipments' => ShipmentResource::collection($shipments)
         ])->getResponse();
@@ -31,7 +32,7 @@ class ShipmentController extends Controller
 
     public function getDelivered()
     {
-        $shipments = DeliveryPartner::getByStatus(auth()->user(), Shipment::$statusDelivered);
+        $shipments = Customer::getByStatus(auth()->user(), Shipment::$statusDelivered);
         return (new ResponseService)->data([
             'shipments' => ShipmentResource::collection($shipments)
         ])->getResponse();
@@ -39,7 +40,7 @@ class ShipmentController extends Controller
 
     public function all()
     {
-        $shipments = DeliveryPartner::all(auth()->user());
+        $shipments = Customer::all(auth()->user());
         return (new ResponseService)->data([
             'shipments' => ShipmentResource::collection($shipments)
         ])->getResponse();
@@ -50,7 +51,6 @@ class ShipmentController extends Controller
         if ($action == "new-order") {
             $fileds = $request->validated();
             $shipment = ShipmentService::makeShipment(auth()->user(), $fileds);
-            // ShipmentService::assignDeliveryPartner($shipment);
             return (new ResponseService)->data(['shipment' => $shipment])->getResponse();
         }
     }
