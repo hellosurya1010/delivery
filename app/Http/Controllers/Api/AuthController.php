@@ -201,6 +201,12 @@ class AuthController extends Controller
         ])->getResponse();
     }
 
+    public function profile(){
+        return (new ResponseService)->data([
+            'profile' => new UserResource(auth()->user())
+        ])->getResponse();
+    }
+
     public function updateCoOrdinates(Request $request)
     {
         $validated = $request->validate(['latitude' => "required", "longitude" => 'required']);

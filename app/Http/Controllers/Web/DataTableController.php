@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Shipment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use DataTables;
@@ -74,5 +75,26 @@ class DataTableController extends Controller
             })
             ->escapeColumns([])
             ->make(true);
+    }
+
+    public function shipments()
+    {
+        $shipments = Shipment::with(['customer', "deliveryPartner"])->latest()->get();
+        return Datatables::of($shipments)
+        ->addIndexColumn()
+        ->addColumn('customer', function ($row) {
+            return $row->customer->first_name;
+        })
+        ->addColumn('delivery_partner', function ($row) {
+            return $row->delivery_partner->first_name;
+        })
+        ->addColumn('price', function ($row) {
+            return $row->price;
+        })
+        ->addColumn('distance', function ($row) {
+            return $row->distance;
+        })
+        ->escapeColumns([])
+        ->make(true);
     }
 }

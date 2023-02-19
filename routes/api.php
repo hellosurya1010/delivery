@@ -32,7 +32,8 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware("auth:sanctum")->group(function () {
-
+    
+    Route::get('profile', [AuthController::class, 'profile'])->middleware('auth:sanctum');
     Route::get('settings', [AuthController::class, 'getSettings']);
 
     Route::group(["middleware" => ['isCustomer']], function () {

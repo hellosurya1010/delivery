@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(DeliveryPartner::class);
     }
+
+    public function shipments()
+    {
+        return $this->hasMany(Shipment::class);
+    }
 }

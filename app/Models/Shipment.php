@@ -17,4 +17,12 @@ class Shipment extends Model
         return $this->hasMany(ShipmentStatus::class);
     }
 
+    public function deliveryPartner(){
+        return $this->belongsTo(User::class, "delivery_partner_id");
+    }
+
+    public function customer(){
+        return $this->belongsTo(User::class, "customer_id");
+    }
+
 }

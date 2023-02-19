@@ -45,4 +45,5 @@ Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], function () {
 Route::group(['prefix' => 'datatable', 'as' => 'datatable.'], function () {
     Route::get('delivery-partners', [DataTableController::class, "deliveryPartners"])->name('delivery-partners');
     Route::get('customers', [DataTableController::class, "customers"])->name('customers');
+    Route::get('shipments', [DataTableController::class, "shipments"])->name('shipments');
 });
