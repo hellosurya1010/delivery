@@ -35,13 +35,9 @@ Route::middleware("auth:sanctum")->group(function () {
     
     Route::get('profile', [AuthController::class, 'profile'])->middleware('auth:sanctum');
     Route::get('settings', [AuthController::class, 'getSettings']);
-
-    Route::group(["middleware" => ['isCustomer']], function () {
-        Route::apiResource('customer-shipment.action', CustomerShipmentController::class);
-    });
     
     Route::prefix("customer/shipments")->middleware(['isCustomer'])->group(function () {
-        Route::get('create', [CustomerShipmentController::class, 'create']);
+        Route::post('create', [CustomerShipmentController::class, 'create']);
         Route::get('un-accepted', [CustomerShipmentController::class, 'getUnAccepted']);
         Route::get('accepted', [CustomerShipmentController::class, 'getAcepted']);
         Route::get('delivered', [CustomerShipmentController::class, 'getDelivered']);
