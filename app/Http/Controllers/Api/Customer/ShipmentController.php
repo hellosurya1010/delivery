@@ -46,12 +46,10 @@ class ShipmentController extends Controller
         ])->getResponse();
     }
 
-    public function create(CreateShipmentRequest $request, $action)
+    public function create(CreateShipmentRequest $request)
     {
-        if ($action == "new-order") {
-            $fileds = $request->validated();
-            $shipment = ShipmentService::makeShipment(auth()->user(), $fileds);
-            return (new ResponseService)->data(['shipment' => $shipment])->getResponse();
-        }
+        $fileds = $request->validated();
+        $shipment = ShipmentService::makeShipment(auth()->user(), $fileds);
+        return (new ResponseService)->data(['shipment' => $shipment])->getResponse();
     }
 }
