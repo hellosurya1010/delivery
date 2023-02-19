@@ -17,12 +17,9 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $settgins = Setting::all();
-        $shipment = $settgins->where('name', "shipment")->first();
-        $map = $settgins->where('name', "map")->first();
+        $shipment = Setting::where('name', "shipment")->first();
+        $map = Setting::where('name', "map")->first();
         $currencies = CSCService::getCurrencies();
-
-        // dd($currencies->first()->name_and_symbol, $currencies->toArray(), array_column($currencies->toArray(), 'code'));
         return view('settings.index', compact('shipment', "map", "currencies"));
     }
 

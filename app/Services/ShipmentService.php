@@ -6,6 +6,7 @@ use App\Models\DeliveryPartner;
 use App\Models\Shipment;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class ShipmentService extends Service
 {
@@ -13,6 +14,7 @@ class ShipmentService extends Service
     {
         $shipment = new Shipment();
         $shipment->customer_id = $user->id;
+        $shipment->shipment_id = Str::random(6);
         $shipment->to_delivery_at = $fields['to_delivery_at'] ?? Carbon::today()->addDay();
         $shipment->price = $fields['price'];
         $shipment->distance = $fields['distance'];

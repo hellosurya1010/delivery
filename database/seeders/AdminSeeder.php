@@ -15,12 +15,28 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User();
-        $user->first_name = "Admin";
-        $user->email = "admin@gmail.com";
-        $user->phone = "1234567890";
-        $user->password = Hash::make("12345678");
-        $user->role = User::$admin;
-        $user->save();
+        $admins = [
+            [
+                'first_name' => 'Admin',
+                'email' => 'admin@gmail.com',
+                'phone' => rand(1000000000, 9999999999),
+            ],
+            [
+                'first_name' => 'Admin',
+                'email' => 'surya@admin.com',
+                'phone' => rand(1000000000, 9999999999),
+            ],
+        ];
+        foreach ($admins as $admin ) {
+            $user = User::where('email', $admin['email'])->orWhere('phone', $admin['phone'])->first();
+            if(!$user){
+                $user = new User();
+                $user->email = $admin['email'];
+                $user->phone = $admin['phone'];
+                $user->password = Hash::make("12345678");
+                $user->role = User::$admin;
+                $user->save();
+            }
+        }
     }
 }

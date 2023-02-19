@@ -20,6 +20,7 @@ class CreateShipmentsTable extends Migration
             // $table->foreign('customer_id')->references('id')->on('users')->onDelete('set null');
             // $table->unsignedInteger('delivery_partner_id');
             // $table->foreign('delivery_partner_id')->references('id')->on('users')->onDelete('set null');
+            $table->string('shipment_id')->nullable();
             $table->foreignId('customer_id')->nullable();
             $table->foreignId('delivery_partner_id')->nullable();
             $table->timestamp('to_delivery_at')->nullable();
