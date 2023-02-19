@@ -1,11 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api\Customer;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateShipmentRequest;
-use App\Services\ResponseService;
-use App\Services\Shipment\Service as ShipmentService;
 use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
@@ -17,7 +14,17 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        
+        return view('shipment.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -26,14 +33,9 @@ class ShipmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateShipmentRequest $request, $action)
+    public function store(Request $request)
     {
-        if ($action == "new-order") {
-            $fileds = $request->validated();
-            $shipment = ShipmentService::makeShipment(auth()->user(), $fileds);
-            // ShipmentService::assignDeliveryPartner($shipment);
-            return (new ResponseService)->data(['shipment' => $shipment])->getResponse();
-        }
+        //
     }
 
     /**
@@ -48,15 +50,26 @@ class ShipmentController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $action, $id)
+    public function update(Request $request, $id)
     {
-        
+        //
     }
 
     /**

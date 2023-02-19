@@ -17,7 +17,7 @@ class CreateShipmentStatusesTable extends Migration
             $table->increments('id');
             $table->foreignId("shipment_id");
             $table->string('status');
-            $table->string("status_changed_by");
+            $table->string("updated_by");
             $table->timestamps();
         });
     }

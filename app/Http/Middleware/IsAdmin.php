@@ -20,6 +20,6 @@ class IsAdmin
         if(auth()->user()->role == User::$admin){
             return $next($request);
         }
-        abort(404);
+        abort(401);
     }
 }

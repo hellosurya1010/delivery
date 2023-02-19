@@ -26,11 +26,18 @@ class CreateShipmentsTable extends Migration
             $table->timestamp('to_delivery_at')->nullable();
             $table->float('price')->nullable();
             $table->float('distance')->nullable();
-            $table->string('status')->default(Shipment::$statusOrderPlace);
+            $table->string('status')->default(Shipment::$statusOrderPlaced);
+
             $table->string('pickup_lat')->nullable();
             $table->string('pickup_lon')->nullable();
-            $table->string('dropup_lat')->nullable();
-            $table->string('dropup_lon')->nullable();
+            $table->string('pickup_place_id')->nullable();
+            $table->string('pickup_place_name')->nullable();
+
+            $table->string('dropin_lat')->nullable();
+            $table->string('dropin_lon')->nullable();
+            $table->string('dropin_place_id')->nullable();
+            $table->string('dropin_place_name')->nullable();
+
             $table->timestamps();
         });
     }

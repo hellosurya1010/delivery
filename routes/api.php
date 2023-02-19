@@ -30,13 +30,28 @@ Route::prefix('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 });
 
-Route::group(["middleware" => "auth:sanctum"], function () {
+Route::middleware("auth:sanctum")->group(function () {
+
     Route::get('settings', [AuthController::class, 'getSettings']);
-    Route::group(["middleware" => ['isApiCustomer']], function () {
+
+    Route::group(["middleware" => ['isCustomer']], function () {
         Route::apiResource('customer-shipment.action', CustomerShipmentController::class);
     });
-    Route::group(["middleware" => ['isApiDeliveryPartner']], function () {
-        Route::apiResource('delivery-partner-shipment.action', DeliveryPartnerShipmentController::class);
+    
+    Route::prefix("customer/shipments")->middleware(['isCustomer'])->group(function () {
+        Route::get('create', [CustomerShipmentController::class, 'unAccepted']);
+    });
+    
+    Route::prefix("shipments")->group(function () {
+        Route::get('detials', [CustomerShipmentController::class, 'unAccepted']);
+    });
+
+    Route::prefix("delivery-partner/shipments")->middleware(['isDeliveryPartner'])->group(function () {
+        Route::get('un-accepted', [DeliveryPartnerShipmentController::class, 'unAccepted']);
+        Route::get('details/{shipmentId}', [DeliveryPartnerShipmentController::class, 'accept']);
+        Route::patch('accept/{shipmentId}', [DeliveryPartnerShipmentController::class, 'accept']);
+        Route::patch('delivered/{shipmentId}', [DeliveryPartnerShipmentController::class, 'delivered']);
+        Route::get('all', [DeliveryPartnerShipmentController::class, 'index']);
     });
 });
 

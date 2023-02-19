@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api\DeliveryPartner;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ShipmentResource;
 use App\Models\Shipment;
 use App\Services\ResponseService;
-use App\Services\ShipmentService;
+use App\Services\Shipment\DeliveryPartner;
+use App\Services\Shipment\Service as ShipmentService;
 use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
@@ -15,10 +17,44 @@ class ShipmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index($slug)
     {
-        $shipments = Shipment::all();
-        return (new ResponseService)->data(['shipments' => $shipments])->getResponse();
+        $shipments = null;
+        if ($slug == "un-accepted-shipments") {
+            // $shipments = Shipment::all();
+        }
+    }
+
+
+    public function unAccepted()
+    {
+        $shipments = DeliveryPartner::unAccepted(auth()->user());
+        return (new ResponseService)->data([
+            'shipments' => ShipmentResource::collection($shipments)
+        ])->getResponse();
+    }
+
+    public function accept($id)
+    {
+        $shipment = ShipmentService::findShipment($id);
+        $status = Shipment::$statusAccepted;
+        $user = auth()->user();
+        ShipmentService::updateStatus($shipment, $status, $user);
+        return (new ResponseService)
+            ->message('Shipment accepted successfully.')
+            ->getResponse();
+    }
+
+    public function delivered($id)
+    {
+        $shipment = ShipmentService::findShipment($id);
+        $status = Shipment::$statusDelivered;
+        $user = auth()->user();
+        ShipmentService::updateStatus($shipment, $status, $user);
+        return (new ResponseService)
+            ->message('Shipment delivered successfully.')
+            ->getResponse();
     }
 
     /**
@@ -53,11 +89,9 @@ class ShipmentController extends Controller
     public function update(Request $request, $action, $id)
     {
 
-        $shipment = ShipmentService::findShipment($id);
-        if($action == 'accept'){
-            $shipment->status = Shipment::$statusAccepted;
-            $shipment->save();
-        }else if($action == 'delivered'){
+
+        if ($action == 'accept') {
+        } else if ($action == 'delivered') {
             $shipment->status = Shipment::$statusDelivered;
             $shipment->save();
         }

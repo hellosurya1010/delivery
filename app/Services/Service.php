@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Traits\HelpersTrait;
 use App\Traits\ResourcesTrait;
 use App\Traits\ResponseTrait;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class Service
@@ -21,8 +22,15 @@ class Service
 
     public static function debugException($ex)
     {
-        if (env('APP_DEBUG')) {
+        Log::error($ex);
+        if (config('app.debug')) {
             dd($ex);    
+        }else if(request()->wantsJson()){
+            return (new ResponseService)
+            ->message('Server error')
+            ->devMessage($ex)
+            ->code(500)
+            ->getResponse();
         }
     }
 }

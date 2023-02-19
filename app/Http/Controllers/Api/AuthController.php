@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddDeleverPartnerRequest;
 use App\Http\Requests\CreateCustomerRequest;
+use App\Http\Resources\MapSettingResource;
+use App\Http\Resources\ShipmentSettingResource;
 use App\Http\Resources\UserResource;
 use App\Models\Setting;
 use App\Models\User;
@@ -13,6 +15,7 @@ use App\Services\CSCService;
 use App\Services\CustomerService;
 use App\Services\DPService;
 use App\Services\ResponseService;
+use App\Services\SettingsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -37,8 +40,12 @@ class AuthController extends Controller
 
     public function getSettings()
     {
-        $settings = Setting::all();
-        return (new ResponseService)->data(["settings" =>  $settings])->getResponse();
+        $shipment = SettingsService::shipment();
+        $map = SettingsService::map();
+        return (new ResponseService)->data([
+            "shipment" => new ShipmentSettingResource($shipment),
+            "map" => new MapSettingResource($map),
+        ])->getResponse();
     }
 
     public function addDeleverPartner(AddDeleverPartnerRequest $request)

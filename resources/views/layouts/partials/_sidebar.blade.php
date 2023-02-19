@@ -41,6 +41,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('shipments.index') }}">
+                        <i class="ri-user-3-fill"></i> <span data-key="t-widgets">Shipments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link menu-link" href="{{ route('delivery-partners.index') }}">
                         <i class="ri-truck-fill"></i> <span data-key="t-widgets">Delivery partners</span>
                     </a>

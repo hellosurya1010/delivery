@@ -45,6 +45,13 @@ class CSCService extends Service
         });
     }
 
+    public static function findCurreny($currencyId)
+    {
+        return Cache::remember("currency$currencyId", now()->addDays(7), function() use($currencyId) {
+            return Currency::find($currencyId);
+        });
+    }
+
     public static function currencyConvert()
     {
         $currency = FacadeCurrency::convert()

@@ -26,11 +26,18 @@ class CreateShipmentRequest extends FormRequest
         return [
             "price" => "required",
             "distance" => "required",
+            "to_delivery_at" => "nullable",
+            
             "pickup_lat" => "required",
             "pickup_lon" => "required",
-            "to_delivery_at" => "nullable",
-            "dropup_lat" => "required",
-            "dropup_lon" => "required",
+            "pickup_place_id" => "required",
+            "pickup_place_name" => "required",
+            
+            "dropin_lat" => "required",
+            "dropin_lon" => "required",
+            "dropin_place_id" => "required",
+            "dropin_place_name" => "required",
+            
         ];
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Middleware\Api;
+namespace App\Http\Middleware;
 
 use App\Models\User;
 use App\Services\ResponseService;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsDeliveryPartner
+class IsCustomer
 {
     /**
      * Handle an incoming request.
@@ -18,14 +18,14 @@ class IsDeliveryPartner
      */
     public function handle(Request $request, Closure $next)
     {
-        $role = User::$deliveryPartner;
-        if (auth()->user()->role == $role) {
+        if(auth()->user()->role == User::$customer){
             return $next($request);
         }
         return (new ResponseService)
-            ->message("Error")
-            ->devMessage("This API URI is belongs to $role.")
-            ->errors(true)
-            ->getResponse();
+        ->devMessage("This URI only can be accessible for Customer role only.")
+        ->errors(true)
+        ->code(401)
+        ->message('Unauthorised.')
+        ->getResponse();
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\DataTableController;
 use App\Http\Controllers\Web\DeliveryPartnerController;
 use App\Http\Controllers\Web\SettingsController;
+use App\Http\Controllers\Web\ShipmentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'isAdmin', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource("customers", CustomerController::class)->name('admin', 'customers');
+    Route::resource("shipments", ShipmentController::class)->name('admin', 'shipments');
     Route::resource("delivery-partners", DeliveryPartnerController::class)->name('admin', 'delivery-partner');  
 Route::resource('settings', SettingsController::class)->name('settings', 'settings');
 });
