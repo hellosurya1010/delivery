@@ -12,24 +12,34 @@ use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function index($slug)
-    {
-        $shipments = null;
-        if ($slug == "un-accepted-shipments") {
-            // $shipments = Shipment::all();
-        }
-    }
-
-
-    public function unAccepted()
+    
+    public function getUnAccepted()
     {
         $shipments = DeliveryPartner::unAccepted(auth()->user());
+        return (new ResponseService)->data([
+            'shipments' => ShipmentResource::collection($shipments)
+        ])->getResponse();
+    }
+
+    public function getAcepted()
+    {
+        $shipments = DeliveryPartner::getByStatus(auth()->user(), Shipment::$statusAccepted);
+        return (new ResponseService)->data([
+            'shipments' => ShipmentResource::collection($shipments)
+        ])->getResponse();
+    }
+
+    public function getDelivered()
+    {
+        $shipments = DeliveryPartner::getByStatus(auth()->user(), Shipment::$statusDelivered);
+        return (new ResponseService)->data([
+            'shipments' => ShipmentResource::collection($shipments)
+        ])->getResponse();
+    }
+
+    public function all()
+    {
+        $shipments = DeliveryPartner::all(auth()->user());
         return (new ResponseService)->data([
             'shipments' => ShipmentResource::collection($shipments)
         ])->getResponse();
@@ -38,74 +48,34 @@ class ShipmentController extends Controller
     public function accept($id)
     {
         $shipment = ShipmentService::findShipment($id);
-        $status = Shipment::$statusAccepted;
-        $user = auth()->user();
-        ShipmentService::updateStatus($shipment, $status, $user);
-        return (new ResponseService)
-            ->message('Shipment accepted successfully.')
+        $message = 'Shipment already accepted.';
+        if ($shipment->status == Shipment::$statusOrderPlaced) {
+            $user = auth()->user();
+            $shipment->delivery_partner_id = $user->id;
+            $shipment->status = Shipment::$statusAccepted;
+            $shipment->save();
+            ShipmentService::logStatus($shipment, $user);
+            $message = 'Shipment accepted successfully.';
+        }
+        return (new ResponseService)->data([
+                'shipments' => new ShipmentResource($shipment)
+            ])  
+            ->message($message)
             ->getResponse();
     }
 
     public function delivered($id)
     {
         $shipment = ShipmentService::findShipment($id);
-        $status = Shipment::$statusDelivered;
+        $shipment->status = Shipment::$statusDelivered;
+        $shipment->save();
         $user = auth()->user();
-        ShipmentService::updateStatus($shipment, $status, $user);
-        return (new ResponseService)
+        ShipmentService::logStatus($shipment, $user);
+        return (new ResponseService)->data([
+                'shipments' => new ShipmentResource($shipment)
+            ])
             ->message('Shipment delivered successfully.')
             ->getResponse();
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $action, $id)
-    {
-
-
-        if ($action == 'accept') {
-        } else if ($action == 'delivered') {
-            $shipment->status = Shipment::$statusDelivered;
-            $shipment->save();
-        }
-        return (new ResponseService)->data(['shipments' => $shipment])->message("Shipment $action")->getResponse();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

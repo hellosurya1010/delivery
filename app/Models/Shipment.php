@@ -11,4 +11,10 @@ class Shipment extends Model
     public static $statusAccepted = "OrderAccepted";
     public static $statusDelivered = "OrderDelivered";
     use HasFactory;
+
+    public function statues()
+    {
+        return $this->hasMany(ShipmentStatus::class);
+    }
+
 }

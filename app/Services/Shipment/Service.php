@@ -32,7 +32,9 @@ class Service extends ServicesService
             $shipment->dropin_place_id = $fields['dropin_place_id'];
             $shipment->dropin_place_name = $fields['dropin_place_name'];
             $shipment->save();
-            self::updateStatus($shipment, Shipment::$statusOrderPlaced, $user);
+            $shipment->status = Shipment::$statusOrderPlaced;
+            $shipment->save();
+            self::logStatus($shipment, $user);
         } catch (\Throwable $th) {
             self::debugException($th);
         }
@@ -44,11 +46,16 @@ class Service extends ServicesService
         return Shipment::find($id);
     }
 
-    public static function updateStatus($shipment, $status, $user)
+    public static function getShipmentStatues($id)
+    {
+        return ShipmentStatus::where('shipment_id',$id)->get();
+    }
+
+    
+
+    public static function logStatus($shipment, $user)
     {
         try {
-            $shipment->status = $status;
-            $shipment->save();
             $shipmentStatus = new ShipmentStatus();
             $shipmentStatus->shipment_id = $shipment->id;
             $shipmentStatus->status = $shipment->status;

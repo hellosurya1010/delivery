@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\UserShortResource;
 use App\Models\User;
 use App\Services\ResponseService;
 use Closure;
@@ -18,14 +19,18 @@ class IsCustomer
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->role == User::$customer){
+        $user = auth()->user();
+        if($user->role == User::$customer){
             return $next($request);
         }
-        return (new ResponseService)
-        ->devMessage("This URI only can be accessible for Customer role only.")
-        ->errors(true)
-        ->code(401)
-        ->message('Unauthorised.')
-        ->getResponse();
+        if (request()->wantsJson()) {
+            return (new ResponseService)
+            ->devMessage("This URI only can be accessible for Customer role only.")
+            ->data(['current_user' => new UserShortResource($user)])
+            ->errors(true)
+            ->code(401)
+            ->message('Unauthorised.')
+            ->getResponse();
+        }
     }
 }

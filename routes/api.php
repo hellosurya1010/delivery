@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Customer\ShipmentController as CustomerShipmentController;
 use App\Http\Controllers\Api\DeliveryPartner\ShipmentController as DeliveryPartnerShipmentController;
+use App\Http\Controllers\Api\ShipmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,19 +40,25 @@ Route::middleware("auth:sanctum")->group(function () {
     });
     
     Route::prefix("customer/shipments")->middleware(['isCustomer'])->group(function () {
-        Route::get('create', [CustomerShipmentController::class, 'unAccepted']);
+        Route::get('create', [CustomerShipmentController::class, 'create']);
+        Route::get('un-accepted', [CustomerShipmentController::class, 'getUnAccepted']);
+        Route::get('accepted', [CustomerShipmentController::class, 'getAcepted']);
+        Route::get('delivered', [CustomerShipmentController::class, 'getDelivered']);
+        Route::get('all', [CustomerShipmentController::class, 'all']);
     });
     
     Route::prefix("shipments")->group(function () {
-        Route::get('detials', [CustomerShipmentController::class, 'unAccepted']);
+        Route::get('details/{id}', [ShipmentController::class, 'details']);
+        Route::get('statues/{id}', [ShipmentController::class, 'statues']);
     });
 
     Route::prefix("delivery-partner/shipments")->middleware(['isDeliveryPartner'])->group(function () {
-        Route::get('un-accepted', [DeliveryPartnerShipmentController::class, 'unAccepted']);
-        Route::get('details/{shipmentId}', [DeliveryPartnerShipmentController::class, 'accept']);
-        Route::patch('accept/{shipmentId}', [DeliveryPartnerShipmentController::class, 'accept']);
-        Route::patch('delivered/{shipmentId}', [DeliveryPartnerShipmentController::class, 'delivered']);
-        Route::get('all', [DeliveryPartnerShipmentController::class, 'index']);
+        Route::get('un-accepted', [DeliveryPartnerShipmentController::class, 'getUnAccepted']);
+        Route::get('accepted', [DeliveryPartnerShipmentController::class, 'getAcepted']);
+        Route::get('delivered', [DeliveryPartnerShipmentController::class, 'getDelivered']);
+        Route::get('all', [DeliveryPartnerShipmentController::class, 'all']);
+        Route::patch('accept/{id}', [DeliveryPartnerShipmentController::class, 'accept']);
+        Route::patch('delivered/{id}', [DeliveryPartnerShipmentController::class, 'delivered']);
     });
 });
 
